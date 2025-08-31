@@ -1,4 +1,26 @@
-type Data = {
+type Pagination = {
+  starting_index: number;
+  ending_index: number;
+  current_page: number;
+  previous_page: number | null;
+  next_page: number | null;
+  total_pages: number;
+  has_previous_page: boolean;
+  has_next_page: boolean;
+  items_per_page: number;
+};
+
+type BaseApiResonseWithoutPagination = {
+  status: boolean;
+  code: number;
+  message: string;
+};
+
+type BaseApiResonseWithPagination = BaseApiResonseWithoutPagination & {
+  pagination_info: Pagination;
+};
+
+export type Data = {
   id: number;
   user_id: number;
   user_full_name: string;
@@ -22,25 +44,27 @@ type Data = {
   videos: any[]; // Replace with exact video structure
 };
 
-type Pagination = {
-  starting_index: number;
-  ending_index: number;
-  current_page: number;
-  previous_page: number | null;
-  next_page: number | null;
-  total_pages: number;
-  has_previous_page: boolean;
-  has_next_page: boolean;
-  items_per_page: number;
+export type AdVideoData = { id: number; link: string; published_on: string };
+
+export type AdBannerImageData = {
+  id: number;
+  last_updated: string;
+  image_url: string;
+  image_id: string;
 };
 
-export type ApiResponseWithoutPagination = {
-  status: boolean;
-  code: number;
-  message: string;
+export type ApiResponseWithoutPagination = BaseApiResonseWithoutPagination & {
   data: Data[];
 };
 
-export type ApiResponseWithPagination = ApiResponseWithoutPagination & {
-  pagination_info: Pagination;
+export type ApiResponseWithPagination = BaseApiResonseWithPagination & {
+  data: Data[];
+};
+
+export type ApiResponseAdVideoWithPagination = BaseApiResonseWithPagination & {
+  data: AdVideoData[];
+};
+
+export type ApiResponseAdImageWithPagination = BaseApiResonseWithPagination & {
+  data: AdBannerImageData[];
 };

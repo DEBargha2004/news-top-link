@@ -1,15 +1,11 @@
 "use client";
 
-import { ApiResponseWithoutPagination } from "@/types/response";
+import { Data } from "@/types/response";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
-export default function HeroCarousel({
-  data,
-}: {
-  data: ApiResponseWithoutPagination;
-}) {
-  const [slides] = useState(data.data);
+export default function HeroCarousel({ data: slides }: { data: Data[] }) {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
@@ -45,9 +41,11 @@ export default function HeroCarousel({
           )}
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
           <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
-            <h2 className="text-2xl md:text-4xl font-bold text-white mb-3 leading-tight">
-              {slide.title}
-            </h2>
+            <Link href={`/news/${slides[currentSlide].id}`}>
+              <h2 className="text-2xl md:text-4xl font-bold text-white mb-3 leading-tight">
+                {slide.title}
+              </h2>
+            </Link>
             <p className="text-gray-200 text-base md:text-lg max-w-3xl line-clamp-3">
               {slide.body}
             </p>

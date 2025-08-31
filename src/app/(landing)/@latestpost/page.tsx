@@ -1,30 +1,18 @@
-import { ApiResponseWithPagination } from "@/types/response";
-import { Clock, Eye, MessageCircle, Share2, User } from "lucide-react";
+import { getLatestNews } from "@/actions/news";
+import { format } from "date-fns";
+import { Clock, Eye, MessageCircle } from "lucide-react";
+import Link from "next/link";
 
 export const revalidate = 60 * 10;
 
 export default async function Page() {
-  const res = await fetch(
-    "https://master-news-service.onrender.com/api/index_delivery?intent=recent",
-    {
-      headers: {
-        "Host-Id": "7a0e2ceb7b344f58a3245325440db44d",
-      },
-    }
-  );
-  const { data } = (await res.json()) as ApiResponseWithPagination;
+  const { data } = await getLatestNews();
   const [post] = data;
   return (
     <section className="py-16 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between mb-12">
           <h2 className="text-4xl font-bold text-gray-900">Latest Post</h2>
-          <a
-            href="#"
-            className="text-blue-600 hover:text-blue-800 font-medium transition-colors flex items-center"
-          >
-            View All Posts →
-          </a>
         </div>
 
         <article className="bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 group cursor-pointer">
@@ -56,7 +44,7 @@ export default async function Page() {
               <div className="flex items-center space-x-4 mb-4">
                 <div className="flex items-center space-x-2 text-sm text-gray-600">
                   <Clock className="h-4 w-4" />
-                  <span>{post.created_on}</span>
+                  <span>{format(new Date(post.created_on), "PPP")}</span>
                 </div>
               </div>
 
@@ -70,21 +58,18 @@ export default async function Page() {
 
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-6">
-                  <div className="flex items-center space-x-2 text-gray-600 hover:text-blue-600 transition-colors cursor-pointer">
-                    <MessageCircle className="h-5 w-5" />
-                    <span className="font-medium">
-                      {post.comments.length} Comments
-                    </span>
-                  </div>
+                  <div className="flex items-center space-x-2 text-gray-600 hover:text-blue-600 transition-colors cursor-pointer"></div>
                   {/* <div className="flex items-center space-x-2 text-gray-600 hover:text-blue-600 transition-colors cursor-pointer">
                     <Share2 className="h-5 w-5" />
                     <span className="font-medium">Share</span>
                   </div> */}
                 </div>
 
-                <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-200 hover:shadow-lg transform hover:-translate-y-0.5">
-                  Read Full Article
-                </button>
+                <Link href={`/news/${post.id}`}>
+                  <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-200 hover:shadow-lg transform hover:-translate-y-0.5">
+                    Read Full Article
+                  </button>
+                </Link>
               </div>
             </div>
           </div>
