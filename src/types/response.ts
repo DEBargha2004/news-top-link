@@ -68,3 +68,8 @@ export type ApiResponseAdVideoWithPagination = BaseApiResonseWithPagination & {
 export type ApiResponseAdImageWithPagination = BaseApiResonseWithPagination & {
   data: AdBannerImageData[];
 };
+
+export type ApiResponseCategoryWiseNewsWithPagination =
+  BaseApiResonseWithPagination & {
+    data: { name: string; articles: Data[] }[];
+  };
