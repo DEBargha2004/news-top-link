@@ -27,6 +27,7 @@ export default async function Page() {
                 <Link
                   href={`/category/${category.articles[0].category.id}`}
                   className="text-blue-600 hover:text-blue-800 flex items-center text-sm font-medium group"
+                  prefetch
                 >
                   View All
                   <ArrowRight className="ml-1 h-4 w-4 group-hover:translate-x-1 transition-transform" />

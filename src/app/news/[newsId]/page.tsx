@@ -71,27 +71,7 @@ export default async function Page({
 
           {/* Author Info */}
           <div className="flex items-center justify-between border-b border-gray-200 pb-6">
-            {/* <div className="flex items-center space-x-4">
-              <img
-                src={article.user_full_name}
-                alt={article.user_full_name}
-                className="w-12 h-12 rounded-full object-cover"
-              />
-              <div>
-                <h3 className="font-semibold text-gray-900">{article.author.name}</h3>
-                <p className="text-sm text-gray-600">{article.author.bio}</p>
-              </div>
-            </div> */}
-
-            {/* Social Actions */}
             <div className="flex items-center space-x-4">
-              {/* <button className="flex items-center space-x-1 text-gray-600 hover:text-red-600 transition-colors">
-                <Heart className="h-5 w-5" />
-                <span className="text-sm">{article.}</span>
-              </button> */}
-              {/* <button className="flex items-center space-x-1 text-gray-600 hover:text-blue-600 transition-colors">
-                <Bookmark className="h-5 w-5" />
-              </button> */}
               <button className="flex items-center space-x-1 text-gray-600 hover:text-green-600 transition-colors">
                 <Share2 className="h-5 w-5" />
               </button>
