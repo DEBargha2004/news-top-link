@@ -2,22 +2,30 @@ import { Data } from "@/types/response";
 import { format } from "date-fns";
 import Link from "next/link";
 
-export default function VideoNews({ data }: { data: Data[] }) {
+export default function VideoNews({
+  data,
+  hideShowAll,
+}: {
+  data: Data[];
+  hideShowAll?: boolean;
+}) {
   return (
     <section className="py-12 bg-gray-900 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between mb-8">
           <h2 className="text-3xl font-bold">Video News</h2>
-          <a
-            href="#"
-            className="text-red-400 hover:text-red-300 font-medium transition-colors"
-          >
-            Watch All →
-          </a>
+          {!hideShowAll && (
+            <Link
+              href={"video-news"}
+              className="text-red-400 hover:text-red-300 font-medium transition-colors"
+            >
+              Watch All →
+            </Link>
+          )}
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {data.slice(0, 6).map((news) => (
+          {data.map((news) => (
             <div key={news.id} className="group">
               <div className="relative aspect-video rounded-lg overflow-hidden mb-4 bg-gray-800">
                 <iframe

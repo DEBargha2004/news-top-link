@@ -1,3 +1,4 @@
+import { getCategoryWiseNews } from "@/actions/news";
 import {
   Facebook,
   Instagram,
@@ -7,10 +8,36 @@ import {
   Twitter,
   Youtube,
 } from "lucide-react";
+import Link from "next/link";
 
-export default function Footer() {
+const quickLinks: { href: string; label: string }[] = [
+  {
+    label: "Home",
+    href: "#",
+  },
+  {
+    label: "Top News",
+    href: "/top-news",
+  },
+  {
+    label: "Latest Post",
+    href: "#latest",
+  },
+  { label: "Trending News", href: "#trending" },
+  {
+    label: "Video News",
+    href: "#video-news",
+  },
+  {
+    label: "Category",
+    href: "#category",
+  },
+];
+
+export default async function Footer() {
+  const categories = await getCategoryWiseNews();
   return (
-    <footer className="bg-gray-900 text-white">
+    <footer className="bg-gray-900 text-white border-t">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Logo and Description */}
@@ -32,46 +59,16 @@ export default function Footer() {
           <div>
             <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
             <ul className="space-y-2">
-              <li>
-                <a
-                  href="#"
-                  className="text-gray-400 hover:text-white transition-colors"
-                >
-                  Home
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="text-gray-400 hover:text-white transition-colors"
-                >
-                  Politics
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="text-gray-400 hover:text-white transition-colors"
-                >
-                  Technology
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="text-gray-400 hover:text-white transition-colors"
-                >
-                  Sports
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="text-gray-400 hover:text-white transition-colors"
-                >
-                  Entertainment
-                </a>
-              </li>
+              {quickLinks.map((ql) => (
+                <li key={ql.label}>
+                  <Link
+                    href={ql.href}
+                    className="text-gray-400 hover:text-white transition-colors"
+                  >
+                    {ql.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -79,46 +76,16 @@ export default function Footer() {
           <div>
             <h4 className="text-lg font-semibold mb-4">Categories</h4>
             <ul className="space-y-2">
-              <li>
-                <a
-                  href="#"
-                  className="text-gray-400 hover:text-white transition-colors"
-                >
-                  World News
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="text-gray-400 hover:text-white transition-colors"
-                >
-                  Business
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="text-gray-400 hover:text-white transition-colors"
-                >
-                  Science
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="text-gray-400 hover:text-white transition-colors"
-                >
-                  Health
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="text-gray-400 hover:text-white transition-colors"
-                >
-                  Environment
-                </a>
-              </li>
+              {categories.data.map((c) => (
+                <li key={c.name}>
+                  <Link
+                    href={`/category/${c.articles[0].category.id}`}
+                    className="text-gray-400 hover:text-white transition-colors"
+                  >
+                    {c.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -145,7 +112,7 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-400 text-sm">
-            © 2024 NewsTopLink. All rights reserved.
+            © {new Date().getFullYear()} NewsTopLink. All rights reserved.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <a
