@@ -9,7 +9,9 @@ export default function Navbar() {
           {/* Logo */}
           <Link href={"/"}>
             <div className="flex-shrink-0">
-              <h1 className="text-2xl font-bold text-blue-900">NewsTopLink</h1>
+              <h1 className="text-2xl font-bold text-blue-900">
+                <img src={"https://www.newstoplink.com/assets/newsTopLinkLogo.png"} style={{height: "50px", width: "150px"}}/>
+              </h1>
             </div>
           </Link>
         </div>

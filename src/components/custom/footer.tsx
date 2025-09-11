@@ -10,42 +10,44 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 
-const quickLinks: { href: string; label: string }[] = [
-  {
-    label: "Home",
-    href: "#",
-  },
-  {
-    label: "Top News",
-    href: "/top-news",
-  },
-  {
-    label: "Latest Post",
-    href: "#latest",
-  },
-  { label: "Trending News", href: "#trending" },
-  {
-    label: "Video News",
-    href: "#video-news",
-  },
-  {
-    label: "Category",
-    href: "#category",
-  },
-];
-
 export default async function Footer() {
-  const categories = await getCategoryWiseNews();
+  const categoryResponse = await getCategoryWiseNews();
+  const importantLinks = [
+    {
+      "imageUrl": "https://www.india.gov.in/sites/upload_files/npi/files/logo_1.png",
+      "webUrl": "https://www.india.gov.in"
+    },
+    {
+      "imageUrl": "https://www.tripura.gov.in/sites/default/files/2023-07/logo-ripura_0_0.png",
+      "webUrl": "https://www.tripura.gov.in"
+    },
+    {
+      "imageUrl": "https://www.mygov.in/sites/all/themes/mygov/front_assets/images/logo.svg",
+      "webUrl": "https://www.mygov.in"
+    },
+    {
+      "imageUrl": "https://s7ap1.scene7.com/is/content/incredibleindia/incredible-india-logo?qlt=82&ts=1727762218512",
+      "webUrl": "https://www.incredibleindia.gov.in/en",
+      "bgColor": "black"
+    },
+    {
+      "imageUrl": "https://ica.tripura.gov.in/sites/default/files/2022-01/ica.png",
+      "webUrl": "https://ica.tripura.gov.in"
+    }
+  ]
+
   return (
     <footer className="bg-gray-900 text-white border-t">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Logo and Description */}
           <div>
-            <h3 className="text-2xl font-bold mb-4">NewsTopLink</h3>
+            <h3 className="text-2xl font-bold mb-4">
+              <img src={"https://www.newstoplink.com/assets/newsTopLinkLogo.png"} style={{height: "50px", width: "150px"}}/>
+            </h3>
             <p className="text-gray-400 mb-4">
-              Your trusted source for breaking news, in-depth analysis, and
-              comprehensive coverage of global events.
+              NewsTopLink is a dynamic and trusted Indian news website that brings you the latest and most 
+              relevant news from the vibrant state of Tripura.
             </p>
             <div className="flex space-x-4">
               <Facebook className="h-5 w-5 text-gray-400 hover:text-white cursor-pointer transition-colors" />
@@ -59,14 +61,26 @@ export default async function Footer() {
           <div>
             <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
             <ul className="space-y-2">
-              {quickLinks.map((ql) => (
-                <li key={ql.label}>
-                  <Link
-                    href={ql.href}
-                    className="text-gray-400 hover:text-white transition-colors"
+              {importantLinks.map(impLink => (
+                <li
+                  key={impLink.webUrl}
+                  className="rounded-lg p-2"
+                  style={{ backgroundColor: impLink.bgColor ?? "white" }}
+                >
+                  <a
+                    href={impLink.webUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center border border-white rounded transition-colors hover:bg-gray-800"
+                    style={{ height: "50px", padding: "5px", background: "transparent" }}
                   >
-                    {ql.label}
-                  </Link>
+                    <img
+                      src={impLink.imageUrl}
+                      alt="Important Link"
+                      className="h-10 mx-auto"
+                      style={{ maxHeight: "40px" }}
+                    />
+                  </a>
                 </li>
               ))}
             </ul>
@@ -76,14 +90,14 @@ export default async function Footer() {
           <div>
             <h4 className="text-lg font-semibold mb-4">Categories</h4>
             <ul className="space-y-2">
-              {categories.data.map((c) => (
-                <li key={c.name}>
-                  <Link
-                    href={`/category/${c.articles[0].category.id}`}
+              {categoryResponse.data.map(category => (
+                <li>
+                  <a
+                    href={`/category/${category.articles[0].category.id}`}
                     className="text-gray-400 hover:text-white transition-colors"
                   >
-                    {c.name}
-                  </Link>
+                    {category.name}
+                  </a>
                 </li>
               ))}
             </ul>
@@ -112,7 +126,7 @@ export default async function Footer() {
         {/* Bottom Bar */}
         <div className="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-400 text-sm">
-            © {new Date().getFullYear()} NewsTopLink. All rights reserved.
+            &copy; {new Date().getFullYear()} NewsTopLink. All rights reserved.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <a

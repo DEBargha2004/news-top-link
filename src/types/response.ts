@@ -71,5 +71,14 @@ export type ApiResponseAdImageWithPagination = BaseApiResonseWithPagination & {
 
 export type ApiResponseCategoryWiseNewsWithPagination =
   BaseApiResonseWithPagination & {
-    data: { name: string; articles: Data[] }[];
+    data: { id: number, name: string; articles: Data[] }[];
   };
+
+export type ApiResponseQuotation =  {
+  status: boolean,
+  data: {
+    "q": string,
+    "a": string,
+    "h": string
+  }
+};
