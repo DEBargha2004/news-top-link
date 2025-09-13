@@ -1,4 +1,5 @@
 import {
+  getCategoryWiseNews,
   getLatestNews,
   getNewsInfo,
   getTopNews,
@@ -7,15 +8,33 @@ import {
 import GotoPrev from "@/components/custom/go-to-prev";
 import { format } from "date-fns";
 import { ArrowLeft, Clock, Eye, Facebook, Share2, Twitter } from "lucide-react";
+import { Metadata } from "next";
 
 export async function generateStaticParams() {
-  const topNews = (await getTopNews()).data;
-  const latestNews = (await getLatestNews()).data;
-  const trendingNews = (await getTrendingNews()).data;
+  const newsSet = new Set<number>();
 
-  return [...topNews, ...latestNews, ...trendingNews].map((news) => ({
-    newsId: news.id.toString(),
-  }));
+  (await getTopNews()).data.forEach((news) => newsSet.add(news.id));
+  (await getLatestNews()).data.forEach((news) => newsSet.add(news.id));
+  (await getTrendingNews()).data.forEach((news) => newsSet.add(news.id));
+  // (await getCategoryWiseNews()).data.forEach((cat) =>
+  //   cat.articles.forEach((news) => newsSet.add(news.id))
+  // );
+
+  return Array.from(newsSet).map((id) => ({ newsId: id.toString() }));
+}
+
+export async function generateMetaData({
+  params,
+}: {
+  params: Promise<{ newsId: string }>;
+}): Promise<Metadata> {
+  const { newsId } = await params;
+  const article = await getNewsInfo(newsId);
+
+  return {
+    title: article.title,
+    description: article.body.slice(0, 100),
+  };
 }
 
 export default async function Page({

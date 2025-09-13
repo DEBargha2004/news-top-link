@@ -1,17 +1,12 @@
-export default function Layout({
-  children,
-  carousel,
-  topnews,
-}: {
-  children: React.ReactNode;
-  carousel: React.ReactNode;
-  topnews: React.ReactNode;
-}) {
+import CarouselSC from "./_components/carousel";
+import TopNewsSC from "./_components/top-news";
+
+export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
       {children}
-      {carousel}
-      {topnews}
+      <CarouselSC />
+      <TopNewsSC />
     </>
   );
 }
