@@ -18,10 +18,14 @@ export async function generateMetadata({
   params: Promise<{ cId: string }>;
 }): Promise<Metadata> {
   const { cId } = await params;
-  const res = await getCategoryNewsInfo(cId);
+  const res = await getCategoryWiseNews();
+
+  const category = res.data.find(
+    (cat) => cat.articles[0].category.id === Number(cId)
+  );
 
   return {
-    title: res.data[0].title,
+    title: category?.name,
   };
 }
 
