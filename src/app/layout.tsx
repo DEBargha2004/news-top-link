@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: { default: "Newstoplink.com", template: "%s | Newstoplink.com" },
+  title: { template: "%s | Newstoplink.com", default: "Newstoplink.com" },
 };
 
 export default function RootLayout({

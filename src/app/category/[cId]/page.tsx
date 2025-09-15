@@ -1,6 +1,7 @@
-import { getCategoryWiseNews, getCateoryNewsInfo } from "@/actions/news";
+import { getCategoryWiseNews, getCategoryNewsInfo } from "@/actions/news";
 import { format } from "date-fns";
 import { Clock } from "lucide-react";
+import { Metadata } from "next";
 import Link from "next/link";
 
 export async function generateStaticParams() {
@@ -11,13 +12,26 @@ export async function generateStaticParams() {
   }));
 }
 
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ cId: string }>;
+}): Promise<Metadata> {
+  const { cId } = await params;
+  const res = await getCategoryNewsInfo(cId);
+
+  return {
+    title: res.data[0].title,
+  };
+}
+
 export default async function Page({
   params,
 }: {
   params: Promise<{ cId: string }>;
 }) {
   const { cId } = await params;
-  const res = await getCateoryNewsInfo(cId);
+  const res = await getCategoryNewsInfo(cId);
 
   return (
     <section className="py-12 bg-white">

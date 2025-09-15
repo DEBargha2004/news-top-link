@@ -118,7 +118,7 @@ export async function getCategoryWiseNews() {
   return (await res.json()) as ApiResponseCategoryWiseNewsWithPagination;
 }
 
-export async function getCateoryNewsInfo(id: string) {
+export async function getCategoryNewsInfo(id: string) {
   const res = await fetch(
     `https://master-news-service.onrender.com/api/category/${id}`,
     {

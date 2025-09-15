@@ -10,20 +10,7 @@ import { format } from "date-fns";
 import { ArrowLeft, Clock, Eye, Facebook, Share2, Twitter } from "lucide-react";
 import { Metadata } from "next";
 
-export async function generateStaticParams() {
-  const newsSet = new Set<number>();
-
-  (await getTopNews()).data.forEach((news) => newsSet.add(news.id));
-  (await getLatestNews()).data.forEach((news) => newsSet.add(news.id));
-  (await getTrendingNews()).data.forEach((news) => newsSet.add(news.id));
-  // (await getCategoryWiseNews()).data.forEach((cat) =>
-  //   cat.articles.forEach((news) => newsSet.add(news.id))
-  // );
-
-  return Array.from(newsSet).map((id) => ({ newsId: id.toString() }));
-}
-
-export async function generateMetaData({
+export async function generateMetadata({
   params,
 }: {
   params: Promise<{ newsId: string }>;
@@ -35,6 +22,19 @@ export async function generateMetaData({
     title: article.title,
     description: article.body.slice(0, 100),
   };
+}
+
+export async function generateStaticParams() {
+  const newsSet = new Set<number>();
+
+  (await getTopNews()).data.forEach((news) => newsSet.add(news.id));
+  (await getLatestNews()).data.forEach((news) => newsSet.add(news.id));
+  (await getTrendingNews()).data.forEach((news) => newsSet.add(news.id));
+  // (await getCategoryWiseNews()).data.forEach((cat) =>
+  //   cat.articles.forEach((news) => newsSet.add(news.id))
+  // );
+
+  return Array.from(newsSet).map((id) => ({ newsId: id.toString() }));
 }
 
 export default async function Page({
