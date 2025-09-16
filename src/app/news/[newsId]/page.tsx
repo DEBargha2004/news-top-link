@@ -53,9 +53,9 @@ export async function generateStaticParams() {
   (await getTopNews()).data.forEach((news) => newsSet.add(news.id));
   (await getLatestNews()).data.forEach((news) => newsSet.add(news.id));
   (await getTrendingNews()).data.forEach((news) => newsSet.add(news.id));
-  // (await getCategoryWiseNews()).data.forEach((cat) =>
-  //   cat.articles.forEach((news) => newsSet.add(news.id))
-  // );
+  (await getCategoryWiseNews()).data.forEach((cat) =>
+    cat.articles.forEach((news) => newsSet.add(news.id))
+  );
 
   return Array.from(newsSet).map((id) => ({ newsId: id.toString() }));
 }
