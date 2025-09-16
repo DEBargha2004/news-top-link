@@ -1,5 +1,5 @@
-import { Menu } from "lucide-react";
 import Link from "next/link";
+import Logo from "./logo";
 
 export default function Navbar() {
   return (
@@ -9,7 +9,7 @@ export default function Navbar() {
           {/* Logo */}
           <Link href={"/"}>
             <div className="flex-shrink-0">
-              <h1 className="text-2xl font-bold text-blue-900">NewsTopLink</h1>
+              <Logo />
             </div>
           </Link>
         </div>
