@@ -41,9 +41,18 @@ export default async function Page({
     <section className="py-12 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between mb-8">
-          <h2 className="text-3xl font-bold text-gray-900">
-            {res.data[0].category.name}
-          </h2>
+          <div className="flex items-center space-x-4">
+            <Link href="/" className="text-blue-600 hover:underline flex items-center">
+              <img width="50" height="50" src="https://img.icons8.com/ios/50/circled-left-2.png" alt="circled-left-2" style={{cursor: "pointer"}}/>
+            </Link>
+            <div>
+              <span className="text-red-600">Category</span>
+              <h2 className="text-3xl font-bold text-gray-900">
+                <a></a>{res.data[0].category.name}
+              </h2>
+              <div className="bg-red-600 w-20 h-[5px] rounded mt-5"></div>
+            </div>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

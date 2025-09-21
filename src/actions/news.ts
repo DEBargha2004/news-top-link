@@ -6,6 +6,7 @@ import {
   ApiResponseCategoryWiseNewsWithPagination,
   ApiResponseWithoutPagination,
   ApiResponseWithPagination,
+  ApiResponseQuotation,
   Data,
 } from "@/types/response";
 
@@ -105,13 +106,30 @@ export async function getCategoryWiseNews() {
   return (await res.json()) as ApiResponseCategoryWiseNewsWithPagination;
 }
 
+export async function getQuotation(){
+  const res = await fetch(
+    `${origin}/api/cosmetic_data?intent=quote`,
+    {
+      headers: {
+        "Host-Id": "7a0e2ceb7b344f58a3245325440db44d",
+      },
+      next: {revalidate: 60 * 10}
+    }
+  );
+
+  return (await res.json()) as ApiResponseQuotation
+}
+
 export async function getCategoryNewsInfo(id: string) {
-  const res = await fetch(`${origin}/api/category/${id}`, {
-    headers: {
-      "Host-Id": "7a0e2ceb7b344f58a3245325440db44d",
-    },
-    next: { revalidate: 60 * 10 },
-  });
+  const res = await fetch(
+    `${origin}/api/category/${id}`,
+    {
+      headers: {
+        "Host-Id": "7a0e2ceb7b344f58a3245325440db44d",
+      },
+      next: { revalidate: 60 * 10 },
+    }
+  );
 
   return (await res.json()) as ApiResponseWithPagination;
 }
