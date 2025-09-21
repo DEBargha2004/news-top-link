@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import durga from "@/../public/durga.png";
+import durga from "@/../public/durga.webp";
 import dhaki from "@/../public/dhaki.png";
 import Image from "next/image";
 import { useEffect, useState } from "react";
