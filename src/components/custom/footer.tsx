@@ -43,7 +43,7 @@ export default async function Footer() {
           {/* Logo and Description */}
           <div>
             <h3 className="text-2xl font-bold mb-4">
-              <img src={"https://www.newstoplink.com/assets/newsTopLinkLogo.png"} style={{height: "50px", width: "150px"}}/>
+              <img src={"https://www.newstoplink.com/assets/newsTopLinkLogo.png"} alt="NewsTopLink Logo" style={{height: "50px", width: "150px"}} />
             </h3>
             <p className="text-gray-400 mb-4">
               NewsTopLink is a dynamic and trusted Indian news website that brings you the latest and most 
@@ -91,7 +91,7 @@ export default async function Footer() {
             <h4 className="text-lg font-semibold mb-4">Categories</h4>
             <ul className="space-y-2">
               {categoryResponse.data.map(category => (
-                <li>
+                <li key={category.articles[0].category.id}>
                   <a
                     href={`/category/${category.articles[0].category.id}`}
                     className="text-gray-400 hover:text-white transition-colors"

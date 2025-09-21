@@ -48,6 +48,7 @@ export default function AdImages({ data }: { data: AdBannerImageData[] }) {
             <img
               key={ad.id}
               src={ad.image_url}
+              alt={`Advertisement ${ad_idx + 1}`}
               className={cn(
                 "w-full h-60 transition-all duration-500 delay-500 absolute top-0 left-0",
                 activeAd === ad_idx ? "opacity-100" : "opacity-0"
