@@ -68,9 +68,22 @@ export async function getAdVideos() {
   return (await res.json()) as ApiResponseAdVideoWithPagination;
 }
 
-export async function getAdBannerImages() {
+export async function getLandscapeAdBannerImages() {
   const res = await fetch(
     `${origin}/api/index_delivery?intent=wide_ad_images`,
+    {
+      headers: {
+        "Host-Id": "7a0e2ceb7b344f58a3245325440db44d",
+      },
+      next: { revalidate: 60 * 10 },
+    }
+  );
+  return (await res.json()) as ApiResponseAdImageWithPagination;
+}
+
+export async function getPortraitAdBannerImages() {
+  const res = await fetch(
+    `${origin}/api/index_delivery?intent=tall_ad_images`,
     {
       headers: {
         "Host-Id": "7a0e2ceb7b344f58a3245325440db44d",
@@ -106,30 +119,24 @@ export async function getCategoryWiseNews() {
   return (await res.json()) as ApiResponseCategoryWiseNewsWithPagination;
 }
 
-export async function getQuotation(){
-  const res = await fetch(
-    `${origin}/api/cosmetic_data?intent=quote`,
-    {
-      headers: {
-        "Host-Id": "7a0e2ceb7b344f58a3245325440db44d",
-      },
-      next: {revalidate: 60 * 10}
-    }
-  );
+export async function getQuotation() {
+  const res = await fetch(`${origin}/api/cosmetic_data?intent=quote`, {
+    headers: {
+      "Host-Id": "7a0e2ceb7b344f58a3245325440db44d",
+    },
+    next: { revalidate: 60 * 10 },
+  });
 
-  return (await res.json()) as ApiResponseQuotation
+  return (await res.json()) as ApiResponseQuotation;
 }
 
 export async function getCategoryNewsInfo(id: string) {
-  const res = await fetch(
-    `${origin}/api/category/${id}`,
-    {
-      headers: {
-        "Host-Id": "7a0e2ceb7b344f58a3245325440db44d",
-      },
-      next: { revalidate: 60 * 10 },
-    }
-  );
+  const res = await fetch(`${origin}/api/category/${id}`, {
+    headers: {
+      "Host-Id": "7a0e2ceb7b344f58a3245325440db44d",
+    },
+    next: { revalidate: 60 * 10 },
+  });
 
   return (await res.json()) as ApiResponseWithPagination;
 }

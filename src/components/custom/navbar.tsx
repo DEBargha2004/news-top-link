@@ -1,5 +1,5 @@
 import Link from "next/link";
-import logo from "@/../public/newsTopLinkLogo.png"
+import Logo from "./logo";
 
 export default function Navbar() {
   return (
@@ -10,7 +10,7 @@ export default function Navbar() {
           <Link href={"/"}>
             <div className="flex-shrink-0">
               <h1 className="text-2xl font-bold text-blue-900">
-                <img src={logo.src} alt="NewsTopLink Logo" style={{height: "50px", width: "150px"}} />
+                <Logo />
               </h1>
             </div>
           </Link>

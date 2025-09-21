@@ -1,3 +1,4 @@
+import { getViews } from "@/lib/utils";
 import { Data } from "@/types/response";
 import { format } from "date-fns";
 import Link from "next/link";
@@ -44,7 +45,13 @@ export default function VideoNews({
                 {news.body}
               </p>
               <div className="flex items-center text-xs text-gray-400 gap-2">
-                <span>{news.total_views} views</span>
+                <span>
+                  {getViews({
+                    published_on: news.published_on,
+                    seed: news.body,
+                  })}{" "}
+                  views
+                </span>
                 <span>{format(new Date(news.published_on), "PPP")}</span>
               </div>
             </div>

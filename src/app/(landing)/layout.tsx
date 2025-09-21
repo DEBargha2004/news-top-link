@@ -23,11 +23,11 @@ export default function Layout({
     <main className="space-y-4">
       <DurgaBanner />
       {children}
+      {adimages}
       {topnews}
       {latestpost}
       {trendingpost}
       {videos}
-      {adimages}
       {advideos}
       {category}
     </main>

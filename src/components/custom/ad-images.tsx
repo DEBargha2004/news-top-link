@@ -7,16 +7,16 @@ import { Info } from "lucide-react";
 import { PopoverClose } from "@radix-ui/react-popover";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
+import AdCarousel from "./ad-carousel";
 
-export default function AdImages({ data }: { data: AdBannerImageData[] }) {
-  const [activeAd, setActiveAd] = useState(0);
-
-  useEffect(() => {
-    setInterval(() => {
-      setActiveAd((prev) => (prev >= data.length - 1 ? 0 : prev + 1));
-    }, 6000);
-  }, [data]);
-
+export default function AdImages({
+  wideData,
+  tallData,
+}: {
+  wideData: AdBannerImageData[];
+  tallData: AdBannerImageData[];
+}) {
   return (
     <section className="py-12 text-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -43,18 +43,39 @@ export default function AdImages({ data }: { data: AdBannerImageData[] }) {
           </Popover>
         </div>
 
-        <div className="relative h-60">
-          {data.map((ad, ad_idx) => (
-            <img
-              key={ad.id}
-              src={ad.image_url}
-              alt={`Advertisement ${ad_idx + 1}`}
-              className={cn(
-                "w-full h-60 transition-all duration-500 delay-500 absolute top-0 left-0",
-                activeAd === ad_idx ? "opacity-100" : "opacity-0"
-              )}
-            />
-          ))}
+        <div className="grid lg:grid-cols-4 grid-cols-2 auto gap-4">
+          <div
+            className={cn(
+              "row-span-2 lg:row-start-1 lg:col-start-1 lg:h-full",
+              "h-[500px]"
+            )}
+          >
+            <AdCarousel data={tallData.slice(0, 3)} />
+          </div>
+          <div
+            className={cn(
+              "h-60 lg:col-span-2 lg:row-start-1",
+              "row-start-3 col-span-2"
+            )}
+          >
+            <AdCarousel data={wideData.slice(0, 3)} />
+          </div>
+          <div
+            className={cn(
+              "h-60 lg:col-span-2 lg:row-start-2",
+              "row-start-4 col-span-2"
+            )}
+          >
+            <AdCarousel data={wideData.slice(3)} />
+          </div>
+          <div
+            className={cn(
+              "lg:row-span-2 lg:col-start-4 lg:h-full",
+              "col-start-2 row-start-1 h-[500px]"
+            )}
+          >
+            <AdCarousel data={tallData.slice(3)} />
+          </div>
         </div>
       </div>
     </section>

@@ -4,10 +4,6 @@ import { Skeleton } from "@/components/ui/skeleton";
 export default function Loading() {
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="bg-white border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4"></div>
-      </div>
-
       <article className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Article Header */}
         <header className="mb-8">

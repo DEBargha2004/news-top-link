@@ -1,6 +1,7 @@
 import { getCategoryWiseNews } from "@/actions/news";
 import { format } from "date-fns";
 import { ArrowRight } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 export default async function Page() {
@@ -42,9 +43,11 @@ export default async function Page() {
                     className="block"
                   >
                     <article className="flex space-x-4 group cursor-pointer">
-                      <img
+                      <Image
                         src={article.images[0]}
                         alt={article.title}
+                        width={300}
+                        height={250}
                         className="w-24 h-20 object-cover rounded-lg flex-shrink-0 group-hover:scale-105 transition-transform duration-200"
                       />
                       <div className="flex-1 min-w-0">

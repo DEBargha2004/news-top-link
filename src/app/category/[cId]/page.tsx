@@ -2,6 +2,7 @@ import { getCategoryWiseNews, getCategoryNewsInfo } from "@/actions/news";
 import { format } from "date-fns";
 import { Clock } from "lucide-react";
 import { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 
 export async function generateStaticParams() {
@@ -42,13 +43,23 @@ export default async function Page({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center space-x-4">
-            <Link href="/" className="text-blue-600 hover:underline flex items-center">
-              <img width="50" height="50" src="https://img.icons8.com/ios/50/circled-left-2.png" alt="circled-left-2" style={{cursor: "pointer"}}/>
+            <Link
+              href="/"
+              className="text-blue-600 hover:underline flex items-center"
+            >
+              <img
+                width="50"
+                height="50"
+                src="https://img.icons8.com/ios/50/circled-left-2.png"
+                alt="circled-left-2"
+                style={{ cursor: "pointer" }}
+              />
             </Link>
             <div>
               <span className="text-red-600">Category</span>
               <h2 className="text-3xl font-bold text-gray-900">
-                <a></a>{res.data[0].category.name}
+                <a></a>
+                {res.data[0].category.name}
               </h2>
               <div className="bg-red-600 w-20 h-[5px] rounded mt-5"></div>
             </div>
@@ -60,9 +71,11 @@ export default async function Page({
             <Link href={`/news/${news.id}`} key={news.id} className="block">
               <article className="group cursor-pointer">
                 <div className="relative overflow-hidden rounded-lg mb-4">
-                  <img
+                  <Image
                     src={news.images[0]}
                     alt={news.title}
+                    height={200}
+                    width={350}
                     className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                   <span className="absolute top-3 left-3 px-2 py-1 bg-red-600 text-white text-xs font-medium rounded">

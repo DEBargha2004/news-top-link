@@ -1,6 +1,8 @@
 import { getLatestNews } from "@/actions/news";
+import { getViews } from "@/lib/utils";
 import { format } from "date-fns";
 import { Clock, Eye, MessageCircle } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 export const revalidate = 60 * 10;
@@ -19,9 +21,11 @@ export default async function Page() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
             {/* Image Section */}
             <div className="relative overflow-hidden">
-              <img
+              <Image
                 src={post.images[0]}
                 alt={post.title}
+                height={250}
+                width={350}
                 className="w-full h-64 lg:h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent lg:hidden" />
@@ -32,10 +36,6 @@ export default async function Page() {
                 <span className="px-3 py-1 bg-red-600 text-white text-sm font-medium rounded-full">
                   Latest
                 </span>
-              </div>
-              <div className="absolute top-4 right-4 flex items-center space-x-1 bg-black/50 text-white px-3 py-1 rounded-full text-sm">
-                <Eye className="h-4 w-4" />
-                <span>{post.total_views}</span>
               </div>
             </div>
 

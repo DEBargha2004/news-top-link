@@ -9,7 +9,13 @@ import GotoPrev from "@/components/custom/go-to-prev";
 import { format } from "date-fns";
 import { ArrowLeft, Clock, Eye, Facebook, Share2, Twitter } from "lucide-react";
 import { Metadata } from "next";
+import dynamic from "next/dynamic";
 import { headers } from "next/headers";
+import Image from "next/image";
+import FbShare from "./_components/fb-share";
+import { getViews } from "@/lib/utils";
+
+// const FbShare = dynamic(() => import("./_components/fb-share"), { ssr: false });
 
 export async function generateMetadata({
   params,
@@ -19,15 +25,15 @@ export async function generateMetadata({
   const { newsId } = await params;
   const article = await getNewsInfo(newsId);
   const headerInfo = await headers();
-  const protocol = process.env.NODE_ENV === "development" ? "http" : "https";
+  const protocol = headerInfo.get("x-forwarded-proto") ?? "http";
   const host = headerInfo.get("host");
 
   return {
     title: article.title,
-    description: article.body.slice(0, 100),
+    description: article.body.slice(0, 200),
     openGraph: {
       title: article.title,
-      description: article.body.slice(0, 100),
+      description: article.body.slice(0, 200),
       url: `${protocol}://${host}/news/${newsId}`,
       images: [
         {
@@ -41,7 +47,7 @@ export async function generateMetadata({
     twitter: {
       card: "summary_large_image",
       title: article.title,
-      description: article.body.slice(0, 100),
+      description: article.body.slice(0, 200),
       images: [article.images[0]],
     },
   };
@@ -66,13 +72,18 @@ export default async function Page({
   params: Promise<{ newsId: string }>;
 }) {
   const { newsId } = await params;
+  const headerList = await headers();
+
+  const protocol = headerList.get("x-forwarded-proto");
+  const origin = headerList.get("host");
+  const basePath = `${protocol}://${origin}`;
 
   const article = await getNewsInfo(newsId);
 
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Back Navigation */}
-      <div className="bg-white border-b">
+      {/* <div className="bg-white border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <GotoPrev className="items-center gap-3">
             <button className="flex items-center justify-center text-gray-600 hover:text-blue-600 transition-colors cursor-pointer size-10 border rounded-full">
@@ -81,11 +92,17 @@ export default async function Page({
             <span className="text-lg font-medium">Back to Homepage</span>
           </GotoPrev>
         </div>
-      </div>
+      </div> */}
 
       <article className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Article Header */}
         <header className="mb-8">
+          <GotoPrev className="items-center gap-3 mb-6">
+            <button className="flex items-center justify-center text-gray-600 hover:text-blue-600 transition-colors cursor-pointer size-10 border rounded-full">
+              <ArrowLeft className="h-5 w-5" />
+            </button>
+            <span className="text-lg font-medium">Back to Homepage</span>
+          </GotoPrev>
           <div className="flex items-center space-x-3 mb-4">
             <span className="px-3 py-1 bg-blue-600 text-white text-sm font-medium rounded-full">
               {article.category.name}
@@ -97,9 +114,14 @@ export default async function Page({
               </div>
               <div className="flex items-center space-x-1">
                 <Eye className="h-4 w-4" />
-                <span>{article.total_views} views</span>
+                <span>
+                  {getViews({
+                    published_on: article.published_on,
+                    seed: article.body,
+                  })}
+                  &nbsp; views
+                </span>
               </div>
-              {/* <span>{article.readTime}</span> */}
             </div>
           </div>
 
@@ -123,9 +145,11 @@ export default async function Page({
 
         {/* Featured Image */}
         <div className="mb-8">
-          <img
+          <Image
             src={article.images[0]}
             alt={article.title}
+            height={500}
+            width={600}
             className="w-full h-64 md:h-96 object-cover rounded-lg shadow-lg"
           />
         </div>
@@ -153,14 +177,12 @@ export default async function Page({
             Share this article
           </h4>
           <div className="flex items-center space-x-4">
-            <button className="flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors">
-              <Facebook className="h-4 w-4" />
-              <span>Facebook</span>
-            </button>
-            <button className="flex items-center space-x-2 bg-sky-500 hover:bg-sky-600 text-white px-4 py-2 rounded-lg transition-colors">
-              <Twitter className="h-4 w-4" />
-              <span>Twitter</span>
-            </button>
+            <FbShare url={`${basePath}/news/${newsId}`}>
+              <button className="flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors">
+                <Facebook className="h-4 w-4" />
+                <span>Facebook</span>
+              </button>
+            </FbShare>
           </div>
         </div>
       </article>

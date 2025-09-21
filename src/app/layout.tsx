@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/custom/navbar";
 import Footer from "@/components/custom/footer";
+import Script from "next/script";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,6 +32,14 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-dvh`}
       >
+        {/* <div id="fb-root"></div>
+        <script
+          async
+          defer
+          //@ts-ignore
+          crossorigin="anonymous"
+          src={`https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v23.0&appId=${process.env.FACEBOOK_APP_ID}`}
+        ></script> */}
         <div>
           <Navbar />
           <main>{children}</main>

@@ -6,13 +6,12 @@ import {
   getVideoNews,
 } from "@/actions/news";
 import { Data } from "@/types/response";
-import { da } from "date-fns/locale";
 import { headers } from "next/headers";
 import RSS from "rss";
 
 export async function GET() {
   const headerList = await headers();
-  const origin = headerList.get("origin");
+  const origin = headerList.get("host");
   const protocol = headerList.get("x-forwarded-proto") || "http";
   const site_url = `${protocol}://${origin}`;
   const feed_url = `${site_url}/rss`;
