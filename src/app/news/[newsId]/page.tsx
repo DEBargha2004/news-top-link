@@ -1,4 +1,5 @@
 import {
+  getCategoryWiseNews,
   getLatestNews,
   getNewsInfo,
   getTopNews,
@@ -7,15 +8,56 @@ import {
 import GotoPrev from "@/components/custom/go-to-prev";
 import { format } from "date-fns";
 import { ArrowLeft, Clock, Eye, Facebook, Share2, Twitter } from "lucide-react";
+import { Metadata } from "next";
+import { headers } from "next/headers";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ newsId: string }>;
+}): Promise<Metadata> {
+  const { newsId } = await params;
+  const article = await getNewsInfo(newsId);
+  const headerInfo = await headers();
+  const protocol = process.env.NODE_ENV === "development" ? "http" : "https";
+  const host = headerInfo.get("host");
+
+  return {
+    title: article.title,
+    description: article.body.slice(0, 100),
+    openGraph: {
+      title: article.title,
+      description: article.body.slice(0, 100),
+      url: `${protocol}://${host}/news/${newsId}`,
+      images: [
+        {
+          url: article.images[0],
+          width: 1200,
+          height: 630,
+          alt: article.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: article.title,
+      description: article.body.slice(0, 100),
+      images: [article.images[0]],
+    },
+  };
+}
 
 export async function generateStaticParams() {
-  const topNews = (await getTopNews()).data;
-  const latestNews = (await getLatestNews()).data;
-  const trendingNews = (await getTrendingNews()).data;
+  const newsSet = new Set<number>();
 
-  return [...topNews, ...latestNews, ...trendingNews].map((news) => ({
-    newsId: news.id.toString(),
-  }));
+  (await getTopNews()).data.forEach((news) => newsSet.add(news.id));
+  (await getLatestNews()).data.forEach((news) => newsSet.add(news.id));
+  (await getTrendingNews()).data.forEach((news) => newsSet.add(news.id));
+  // (await getCategoryWiseNews()).data.forEach((cat) =>
+  //   cat.articles.forEach((news) => newsSet.add(news.id))
+  // );
+
+  return Array.from(newsSet).map((id) => ({ newsId: id.toString() }));
 }
 
 export default async function Page({
@@ -90,7 +132,7 @@ export default async function Page({
 
         {/* Article Content */}
         <div className="prose prose-lg max-w-none mb-12">
-          <article className="text-gray-800 leading-relaxed space-y-6">
+          <article className="text-gray-800 leading-relaxed space-y-6 lg:text-xl text-lg">
             {article.body}
           </article>
         </div>

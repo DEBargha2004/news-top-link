@@ -1,9 +1,7 @@
 import { getTopNews } from "@/actions/news";
 import HeroCarousel from "@/components/custom/hero-carousel";
 
-export const relaidate = 60 * 10;
-
-export default async function Page() {
+export default async function CarouselSC() {
   const { data } = await getTopNews();
 
   return (
