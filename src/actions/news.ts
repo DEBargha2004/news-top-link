@@ -120,7 +120,7 @@ export async function getQuotation(){
   return (await res.json()) as ApiResponseQuotation
 }
 
-export async function getCateoryNewsInfo(id: string) {
+export async function getCategoryNewsInfo(id: string) {
   const res = await fetch(
     `${origin}/api/category/${id}`,
     {
