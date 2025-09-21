@@ -1,3 +1,5 @@
+import DurgaBanner from "@/components/custom/durga-banner";
+
 export default function Layout({
   children,
   category,
@@ -19,6 +21,7 @@ export default function Layout({
 }) {
   return (
     <main className="space-y-4">
+      <DurgaBanner />
       {children}
       {topnews}
       {latestpost}

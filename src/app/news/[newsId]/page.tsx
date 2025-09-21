@@ -53,9 +53,9 @@ export async function generateStaticParams() {
   (await getTopNews()).data.forEach((news) => newsSet.add(news.id));
   (await getLatestNews()).data.forEach((news) => newsSet.add(news.id));
   (await getTrendingNews()).data.forEach((news) => newsSet.add(news.id));
-  // (await getCategoryWiseNews()).data.forEach((cat) =>
-  //   cat.articles.forEach((news) => newsSet.add(news.id))
-  // );
+  (await getCategoryWiseNews()).data.forEach((cat) =>
+    cat.articles.forEach((news) => newsSet.add(news.id))
+  );
 
   return Array.from(newsSet).map((id) => ({ newsId: id.toString() }));
 }
@@ -74,11 +74,11 @@ export default async function Page({
       {/* Back Navigation */}
       <div className="bg-white border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <GotoPrev>
-            <button className="flex items-center text-gray-600 hover:text-blue-600 transition-colors cursor-pointer">
-              <ArrowLeft className="h-5 w-5 mr-2" />
-              Back to Homepage
+          <GotoPrev className="items-center gap-3">
+            <button className="flex items-center justify-center text-gray-600 hover:text-blue-600 transition-colors cursor-pointer size-10 border rounded-full">
+              <ArrowLeft className="h-5 w-5" />
             </button>
+            <span className="text-lg font-medium">Back to Homepage</span>
           </GotoPrev>
         </div>
       </div>
