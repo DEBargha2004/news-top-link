@@ -1,3 +1,4 @@
+import { getViews } from "@/lib/utils";
 import { Data } from "@/types/response";
 import { Eye, TrendingUp } from "lucide-react";
 import Link from "next/link";
@@ -32,7 +33,12 @@ export default function TrendingNews({ data }: { data: Data[] }) {
                 </div>
                 <div className="absolute top-3 right-3 flex items-center space-x-1 bg-black/50 text-white px-2 py-1 rounded text-xs">
                   <Eye className="h-3 w-3" />
-                  <span>{post.total_views}</span>
+                  <span>
+                    {getViews({
+                      published_on: post.published_on,
+                      seed: post.body,
+                    })}
+                  </span>
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
               </div>
