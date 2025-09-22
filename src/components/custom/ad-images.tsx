@@ -43,39 +43,47 @@ export default function AdImages({
           </Popover>
         </div>
 
-        <div className="grid lg:grid-cols-4 grid-cols-2 auto gap-4">
-          <div
+        <div className="grid lg:grid-cols-4 lg:grid-rows-2 grid-cols-2 auto gap-4">
+          <section
             className={cn(
-              "row-span-2 lg:row-start-1 lg:col-start-1 lg:h-full",
-              "h-[500px]"
+              "row-span-2 lg:row-start-1 lg:col-start-1 lg:h-full sm:col-span-1 col-span-2",
+              "h-[550px] space-y-2",
+              "flex flex-col"
             )}
           >
+            <h2>Tender</h2>
             <AdCarousel data={tallData.slice(0, 3)} />
-          </div>
-          <div
+          </section>
+          <section
             className={cn(
               "h-60 lg:col-span-2 lg:row-start-1",
-              "row-start-3 col-span-2"
+              "row-start-3 col-span-2 space-y-2",
+              "flex flex-col"
             )}
           >
+            <h2>Tender</h2>
             <AdCarousel data={wideData.slice(0, 3)} />
-          </div>
-          <div
+          </section>
+          <section
             className={cn(
               "h-60 lg:col-span-2 lg:row-start-2",
-              "row-start-4 col-span-2"
+              "row-start-4 col-span-2 space-y-2",
+              "flex flex-col"
             )}
           >
+            <h2>Tender</h2>
             <AdCarousel data={wideData.slice(3)} />
-          </div>
-          <div
+          </section>
+          <section
             className={cn(
-              "lg:row-span-2 lg:col-start-4 lg:h-full",
-              "col-start-2 row-start-1 h-[500px]"
+              "lg:row-span-2 lg:col-start-4 lg:h-full sm:col-span-1 col-span-2",
+              "row-start-1 h-[550px] space-y-2",
+              "flex flex-col"
             )}
           >
+            <h2>Tender</h2>
             <AdCarousel data={tallData.slice(3)} />
-          </div>
+          </section>
         </div>
       </div>
     </section>

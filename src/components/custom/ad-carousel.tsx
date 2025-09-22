@@ -1,57 +1,61 @@
 import { cn } from "@/lib/utils";
 import { AdBannerImageData } from "@/types/response";
 import Image from "next/image";
-import { useEffect, useState } from "react";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "../ui/dialog";
+import { useState } from "react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination, Autoplay } from "swiper/modules";
+
+import "swiper/css";
+import "swiper/css/pagination";
 
 export default function AdCarousel({ data }: { data: AdBannerImageData[] }) {
-  const [activeAd, setActiveAd] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveAd((prev) => (prev >= data.length - 1 ? 0 : prev + 1));
-    }, 6000);
-
-    return () => clearTimeout(interval);
-  }, [data]);
+  const [activeAd, setActiveAd] = useState<AdBannerImageData>();
 
   return (
     <div className="relative h-full">
-      {data.map((ad, ad_idx) => (
-        <Dialog key={ad.id}>
-          <DialogTrigger>
+      <Swiper
+        autoplay={{ delay: 3000, disableOnInteraction: true }}
+        modules={[Pagination, Autoplay]}
+        loop
+        className="size-full"
+      >
+        {data.map((ad, ad_idx) => (
+          <SwiperSlide key={ad.id}>
             <Image
               src={ad.image_url}
               alt={`Advertisement ${ad_idx + 1}`}
               height={300}
               width={600}
               className={cn(
-                "w-full h-full transition-all duration-500 delay-500 absolute top-0 left-0",
-                activeAd === ad_idx ? "block" : "hidden"
+                "w-full h-full transition-all duration-500 delay-500 absolute top-0 left-0"
               )}
+              onClick={() => setActiveAd(ad)}
             />
-          </DialogTrigger>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+      {activeAd ? (
+        <Dialog
+          open={!!activeAd}
+          onOpenChange={(e) => !e && setActiveAd(undefined)}
+        >
           <DialogContent className="min-w-1/2 h-fit p-5">
-            <DialogHeader>
+            <DialogHeader className="hidden">
               <DialogTitle />
             </DialogHeader>
             <Image
-              key={ad.id}
-              src={ad.image_url}
-              alt={`Advertisement ${ad_idx + 1}`}
+              src={activeAd!.image_url}
+              alt={`Advertisement ${activeAd!.image_id + 1}`}
               height={300}
               width={600}
-              className={cn("w-full transition-all duration-500 delay-500")}
+              className={cn(
+                "w-full max-h-[calc(90dvh)] transition-all duration-500 delay-500"
+              )}
             />
           </DialogContent>
         </Dialog>
-      ))}
+      ) : null}
     </div>
   );
 }

@@ -43,13 +43,17 @@ export default async function Page() {
                     className="block"
                   >
                     <article className="flex space-x-4 group cursor-pointer">
-                      <Image
-                        src={article.images[0]}
-                        alt={article.title}
-                        width={300}
-                        height={250}
-                        className="w-24 h-20 object-cover rounded-lg flex-shrink-0 group-hover:scale-105 transition-transform duration-200"
-                      />
+                      <div className="w-24 h-20">
+                        {article.images.length && (
+                          <Image
+                            src={article.images[0]}
+                            alt={article.title}
+                            width={300}
+                            height={250}
+                            className="size-full object-cover rounded-lg flex-shrink-0 group-hover:scale-105 transition-transform duration-200"
+                          />
+                        )}
+                      </div>
                       <div className="flex-1 min-w-0">
                         <h3 className="font-semibold text-gray-900 group-hover:text-blue-600 transition-colors line-clamp-1 mb-1">
                           {article.title}

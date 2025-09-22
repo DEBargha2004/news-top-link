@@ -145,13 +145,17 @@ export default async function Page({
 
         {/* Featured Image */}
         <div className="mb-8">
-          <Image
-            src={article.images[0]}
-            alt={article.title}
-            height={500}
-            width={600}
-            className="w-full h-64 md:h-96 object-cover rounded-lg shadow-lg"
-          />
+          <div className="w-full h-64 md:h-96">
+            {article.images.length && (
+              <Image
+                src={article.images[0]}
+                alt={article.title}
+                height={500}
+                width={600}
+                className="size-full object-cover rounded-lg shadow-lg"
+              />
+            )}
+          </div>
         </div>
 
         {/* Article Content */}

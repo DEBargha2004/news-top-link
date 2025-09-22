@@ -21,13 +21,17 @@ export default async function Page() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
             {/* Image Section */}
             <div className="relative overflow-hidden">
-              <Image
-                src={post.images[0]}
-                alt={post.title}
-                height={250}
-                width={350}
-                className="w-full h-64 lg:h-full object-cover group-hover:scale-105 transition-transform duration-500"
-              />
+              <div className="w-full h-64 lg:h-full">
+                {post.images.length && (
+                  <Image
+                    src={post.images[0]}
+                    alt={post.title}
+                    height={250}
+                    width={350}
+                    className="size-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                )}
+              </div>
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent lg:hidden" />
               <div className="absolute top-4 left-4 flex items-center space-x-2">
                 <span className="px-3 py-1 bg-blue-600 text-white text-sm font-medium rounded-full">

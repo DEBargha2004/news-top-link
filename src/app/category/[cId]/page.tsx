@@ -47,7 +47,7 @@ export default async function Page({
               href="/"
               className="text-blue-600 hover:underline flex items-center"
             >
-              <img
+              <Image
                 width="50"
                 height="50"
                 src="https://img.icons8.com/ios/50/circled-left-2.png"
@@ -71,13 +71,17 @@ export default async function Page({
             <Link href={`/news/${news.id}`} key={news.id} className="block">
               <article className="group cursor-pointer">
                 <div className="relative overflow-hidden rounded-lg mb-4">
-                  <Image
-                    src={news.images[0]}
-                    alt={news.title}
-                    height={200}
-                    width={350}
-                    className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
+                  {news.images.length && (
+                    <div className="w-full h-48">
+                      <Image
+                        src={news.images[0]}
+                        alt={news.title}
+                        height={200}
+                        width={350}
+                        className="size-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                    </div>
+                  )}
                   <span className="absolute top-3 left-3 px-2 py-1 bg-red-600 text-white text-xs font-medium rounded">
                     {news.category.name}
                   </span>
