@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/custom/navbar";
 import Footer from "@/components/custom/footer";
 import Script from "next/script";
+import DurgaBanner from "@/components/custom/durga-banner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -42,6 +43,7 @@ export default function RootLayout({
         ></script> */}
         <div>
           <Navbar />
+          <DurgaBanner />
           <main>{children}</main>
           <Footer />
         </div>

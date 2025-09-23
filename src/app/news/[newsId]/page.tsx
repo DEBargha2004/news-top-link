@@ -9,7 +9,6 @@ import GotoPrev from "@/components/custom/go-to-prev";
 import { format } from "date-fns";
 import { ArrowLeft, Clock, Eye, Facebook, Share2, Twitter } from "lucide-react";
 import { Metadata } from "next";
-import dynamic from "next/dynamic";
 import { headers } from "next/headers";
 import Image from "next/image";
 import FbShare from "./_components/fb-share";

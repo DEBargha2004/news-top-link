@@ -47,10 +47,6 @@ export default function Loading() {
               <Facebook className="h-4 w-4" />
               <span>Facebook</span>
             </button>
-            <button className="flex items-center space-x-2 bg-sky-500 hover:bg-sky-600 text-white px-4 py-2 rounded-lg transition-colors">
-              <Twitter className="h-4 w-4" />
-              <span>Twitter</span>
-            </button>
           </div>
         </div>
       </article>

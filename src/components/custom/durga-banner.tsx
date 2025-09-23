@@ -90,7 +90,7 @@ export default function DurgaBanner() {
       setTimer(minDate.getTime() - currentDate.getTime());
       interval = setInterval(() => {
         setTimer((prev) => prev! - 1000);
-      }, 1000);
+      }, 1000 * 60);
     }
 
     return () => interval && clearInterval(interval);
@@ -133,9 +133,6 @@ export default function DurgaBanner() {
 
 function Timer({ time }: { time: number }) {
   const days = Math.floor(time / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  const minutes = Math.floor((time % (1000 * 60 * 60)) / (1000 * 60));
-  const seconds = Math.floor((time % (1000 * 60)) / 1000);
   return (
     <div className="flex justify-start items-center gap-2 text-2xl font-semibold">
       <span className="whitespace-nowrap">
