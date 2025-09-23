@@ -74,8 +74,8 @@ export default async function Page({
                       <Image
                         src={news.images[0]}
                         alt={news.title}
-                        height={200}
-                        width={350}
+                        height={100}
+                        width={150}
                         className="size-full object-cover group-hover:scale-105 transition-transform duration-300"
                       />
                     </div>

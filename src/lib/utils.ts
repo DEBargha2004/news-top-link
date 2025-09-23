@@ -41,3 +41,23 @@ export async function catchError<T>(promise: Promise<T>) {
 export function createEmptyDataInstance<D>(data: D): { data: D } {
   return { data };
 }
+
+export async function retry<T>(
+  promiseFactory: () => Promise<T>,
+  options: { helperText?: string; retriesCount: number } = { retriesCount: 3 }
+) {
+  let retires_local_count = options.retriesCount;
+  while (retires_local_count > 0) {
+    const [err, res] = await catchError(promiseFactory());
+    if (!err) return res!;
+    retires_local_count--;
+    retires_local_count &&
+      console.log(
+        `Retrying ${retires_local_count} of ${options.retriesCount} ${
+          options?.helperText ?? ""
+        }`
+      );
+  }
+  console.log(`Failed attempt ${options?.helperText ?? ""}`);
+  throw new Error("Retry Limit Exceeded");
+}

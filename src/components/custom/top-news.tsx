@@ -37,8 +37,8 @@ export default function TopNews({
                         src={news.images[0]}
                         alt={news.title}
                         className="size-full object-cover group-hover:scale-105 transition-transform duration-300"
-                        height={200}
-                        width={450}
+                        height={100}
+                        width={250}
                       />
                     )}
                   </div>

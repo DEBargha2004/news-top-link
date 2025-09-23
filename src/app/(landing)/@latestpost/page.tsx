@@ -26,8 +26,8 @@ export default async function Page() {
                   <Image
                     src={post.images[0]}
                     alt={post.title}
-                    height={250}
-                    width={350}
+                    height={150}
+                    width={150}
                     className="size-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                 )}

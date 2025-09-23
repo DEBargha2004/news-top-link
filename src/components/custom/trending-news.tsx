@@ -23,8 +23,8 @@ export default function TrendingNews({ data }: { data: Data[] }) {
                       <Image
                         src={post.images[0]}
                         alt={post.title}
-                        height={200}
-                        width={450}
+                        height={100}
+                        width={200}
                         className="size-full object-cover group-hover:scale-105 transition-transform duration-300"
                       />
                     )}

@@ -48,8 +48,8 @@ export default async function Page() {
                           <Image
                             src={article.images[0]}
                             alt={article.title}
-                            width={300}
-                            height={250}
+                            width={100}
+                            height={80}
                             className="size-full object-cover rounded-lg flex-shrink-0 group-hover:scale-105 transition-transform duration-200"
                           />
                         )}

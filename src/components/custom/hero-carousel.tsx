@@ -40,7 +40,7 @@ export default function HeroCarousel({ data: slides }: { data: Data[] }) {
                   src={slide.images[0]}
                   alt={slide.title}
                   className="size-full object-cover"
-                  width={700}
+                  width={600}
                   height={300}
                 />
               )}

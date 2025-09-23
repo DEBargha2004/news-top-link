@@ -134,13 +134,13 @@ export default async function Page({
           </p> */}
 
             {/* Author Info */}
-            <div className="flex items-center justify-between border-b border-gray-200 pb-6">
+            {/* <div className="flex items-center justify-between border-b border-gray-200 pb-6">
               <div className="flex items-center space-x-4">
                 <button className="flex items-center space-x-1 text-gray-600 hover:text-green-600 transition-colors">
                   <Share2 className="h-5 w-5" />
                 </button>
               </div>
-            </div>
+            </div> */}
           </header>
 
           {/* Featured Image */}
@@ -150,8 +150,8 @@ export default async function Page({
                 <Image
                   src={article.images[0]}
                   alt={article.title}
-                  height={500}
-                  width={600}
+                  height={200}
+                  width={250}
                   className="size-full object-cover rounded-lg shadow-lg"
                 />
               )}
