@@ -29,3 +29,15 @@ export function getViews({
 
   return viewFactor;
 }
+
+export async function catchError<T>(promise: Promise<T>) {
+  try {
+    return [undefined, await promise] as [undefined, T];
+  } catch (error) {
+    return [error, undefined] as [Error, undefined];
+  }
+}
+
+export function createEmptyDataInstance<D>(data: D): { data: D } {
+  return { data };
+}
