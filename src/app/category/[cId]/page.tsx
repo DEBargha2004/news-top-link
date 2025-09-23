@@ -1,6 +1,7 @@
 import { getCategoryWiseNews, getCategoryNewsInfo } from "@/actions/news";
+import { Button } from "@/components/ui/button";
 import { format } from "date-fns";
-import { Clock } from "lucide-react";
+import { ArrowLeft, Clock } from "lucide-react";
 import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -43,17 +44,14 @@ export default async function Page({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center space-x-4">
-            <Link
-              href="/"
-              className="text-blue-600 hover:underline flex items-center"
-            >
-              <Image
-                width="50"
-                height="50"
-                src="https://img.icons8.com/ios/50/circled-left-2.png"
-                alt="circled-left-2"
-                style={{ cursor: "pointer" }}
-              />
+            <Link href="/" className="hover:underline flex items-center">
+              <Button
+                variant={"outline"}
+                size={"icon"}
+                className="rounded-full size-10"
+              >
+                <ArrowLeft />
+              </Button>
             </Link>
             <div>
               <span className="text-red-600">Category</span>
