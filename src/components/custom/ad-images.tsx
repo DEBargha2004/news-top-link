@@ -51,7 +51,7 @@ export default function AdImages({
               "flex flex-col"
             )}
           >
-            <h2>Tender</h2>
+            <h2>Ad 1</h2>
             <AdCarousel data={tallData.slice(0, 3)} />
           </section>
           <section
@@ -61,7 +61,7 @@ export default function AdImages({
               "flex flex-col"
             )}
           >
-            <h2>Tender</h2>
+            <h2>Ad 2</h2>
             <AdCarousel data={wideData.slice(0, 3)} />
           </section>
           <section
@@ -71,7 +71,7 @@ export default function AdImages({
               "flex flex-col"
             )}
           >
-            <h2>Tender</h2>
+            <h2>Ad 3</h2>
             <AdCarousel data={wideData.slice(3)} />
           </section>
           <section
@@ -81,7 +81,7 @@ export default function AdImages({
               "flex flex-col"
             )}
           >
-            <h2>Tender</h2>
+            <h2>Ad 4</h2>
             <AdCarousel data={tallData.slice(3)} />
           </section>
         </div>
