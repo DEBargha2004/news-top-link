@@ -7,7 +7,7 @@ const nextConfig: NextConfig = {
   },
   experimental: {
     workerThreads: false,
-    cpus: 4,
+    cpus: 8,
   },
 };
 
