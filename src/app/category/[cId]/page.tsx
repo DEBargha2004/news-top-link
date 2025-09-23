@@ -57,7 +57,7 @@ export default async function Page({
               <span className="text-red-600">Category</span>
               <h2 className="text-3xl font-bold text-gray-900">
                 <a></a>
-                {res.data[0].category.name}
+                {res.data[0]?.category.name}
               </h2>
               <div className="bg-red-600 w-20 h-[5px] rounded mt-5"></div>
             </div>

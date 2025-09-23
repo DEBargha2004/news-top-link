@@ -47,8 +47,8 @@ export default function AdCarousel({ data }: { data: AdBannerImageData[] }) {
             <Image
               src={activeAd!.image_url}
               alt={`Advertisement ${activeAd!.image_id + 1}`}
-              height={100}
-              width={200}
+              height={300}
+              width={600}
               className={cn(
                 "w-full max-h-[calc(90dvh)] transition-all duration-500 delay-500"
               )}
