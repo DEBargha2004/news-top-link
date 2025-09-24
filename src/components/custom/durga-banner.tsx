@@ -132,7 +132,7 @@ export default function DurgaBanner() {
 }
 
 function Timer({ time }: { time: number }) {
-  const days = Math.floor(time / (1000 * 60 * 60 * 24));
+  const days = Math.ceil(time / (1000 * 60 * 60 * 24));
   return (
     <div className="flex justify-start items-center gap-2 text-2xl font-semibold">
       <span className="whitespace-nowrap">
