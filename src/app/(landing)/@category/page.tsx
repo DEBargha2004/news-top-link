@@ -36,7 +36,7 @@ export default async function Page() {
               </div>
 
               <div className="space-y-4">
-                {category.articles.slice(0, 4)?.map((article) => (
+                {category.articles?.slice(0, 4)?.map((article) => (
                   <Link
                     href={`/news/${article.id}`}
                     key={article.id}
