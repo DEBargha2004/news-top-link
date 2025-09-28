@@ -26,7 +26,7 @@ export default function HeroCarousel({ data: slides }: { data: Data[] }) {
 
   return (
     <div className="relative h-96 md:h-[500px] overflow-hidden bg-gray-900 rounded-lg">
-      {slides.map((slide, index) => (
+      {slides?.map((slide, index) => (
         <Link href={`/news/${slides[currentSlide].id}`} key={slide.id}>
           <div
             key={slide.id}
@@ -75,7 +75,7 @@ export default function HeroCarousel({ data: slides }: { data: Data[] }) {
 
       {/* Slide Indicators */}
       <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-        {slides.map((_, index) => (
+        {slides?.map((_, index) => (
           <button
             key={index}
             onClick={() => setCurrentSlide(index)}

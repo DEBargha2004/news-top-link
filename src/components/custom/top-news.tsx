@@ -8,7 +8,7 @@ export default function TopNews({
   data,
   hideViewAll,
 }: {
-  data: Data[];
+  data?: Data[];
   hideViewAll?: boolean;
 }) {
   return (
@@ -27,7 +27,7 @@ export default function TopNews({
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {data.map((news) => (
+          {data?.map((news) => (
             <article key={news.id} className="group cursor-pointer">
               <Link href={`/news/${news.id}`}>
                 <div className="relative overflow-hidden rounded-lg mb-4">

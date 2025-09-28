@@ -27,7 +27,7 @@ type Tithi = {
 
 const tithi_list: Tithi[] = [
   {
-    title: "শুভ শাস্তি",
+    title: "শুভ ষষ্ঠী",
     date_start: new Date("2025-09-28"),
     date_end: new Date("2025-09-29"),
   },

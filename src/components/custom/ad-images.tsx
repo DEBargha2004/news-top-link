@@ -14,8 +14,8 @@ export default function AdImages({
   wideData,
   tallData,
 }: {
-  wideData: AdBannerImageData[];
-  tallData: AdBannerImageData[];
+  wideData?: AdBannerImageData[];
+  tallData?: AdBannerImageData[];
 }) {
   return (
     <section className="py-12 text-gray-900">
@@ -52,7 +52,7 @@ export default function AdImages({
             )}
           >
             <h2>Ad 1</h2>
-            <AdCarousel data={tallData.slice(0, 3)} />
+            <AdCarousel data={tallData?.slice(0, 3)} />
           </section>
           <section
             className={cn(
@@ -62,7 +62,7 @@ export default function AdImages({
             )}
           >
             <h2>Ad 2</h2>
-            <AdCarousel data={wideData.slice(0, 3)} />
+            <AdCarousel data={wideData?.slice(0, 3)} />
           </section>
           <section
             className={cn(
@@ -72,7 +72,7 @@ export default function AdImages({
             )}
           >
             <h2>Ad 3</h2>
-            <AdCarousel data={wideData.slice(3)} />
+            <AdCarousel data={wideData?.slice(3)} />
           </section>
           <section
             className={cn(
@@ -82,7 +82,7 @@ export default function AdImages({
             )}
           >
             <h2>Ad 4</h2>
-            <AdCarousel data={tallData.slice(3)} />
+            <AdCarousel data={tallData?.slice(3)} />
           </section>
         </div>
       </div>

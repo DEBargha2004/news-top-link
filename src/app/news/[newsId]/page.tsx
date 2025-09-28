@@ -82,18 +82,6 @@ export default async function Page({
   return (
     !!article && (
       <div className="min-h-screen bg-gray-50">
-        {/* Back Navigation */}
-        {/* <div className="bg-white border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <GotoPrev className="items-center gap-3">
-            <button className="flex items-center justify-center text-gray-600 hover:text-blue-600 transition-colors cursor-pointer size-10 border rounded-full">
-              <ArrowLeft className="h-5 w-5" />
-            </button>
-            <span className="text-lg font-medium">Back to Homepage</span>
-          </GotoPrev>
-        </div>
-      </div> */}
-
         <article className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           {/* Article Header */}
           <header className="mb-8">
@@ -128,30 +116,17 @@ export default async function Page({
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-4">
               {article.title}
             </h1>
-
-            {/* <p className="text-xl text-gray-700 leading-relaxed mb-6">
-            {article.subtitle}
-          </p> */}
-
-            {/* Author Info */}
-            {/* <div className="flex items-center justify-between border-b border-gray-200 pb-6">
-              <div className="flex items-center space-x-4">
-                <button className="flex items-center space-x-1 text-gray-600 hover:text-green-600 transition-colors">
-                  <Share2 className="h-5 w-5" />
-                </button>
-              </div>
-            </div> */}
           </header>
 
           {/* Featured Image */}
           <div className="mb-8">
             <div className="w-full h-64 md:h-96">
-              {article.images.length && (
+              {article.images?.length && (
                 <Image
                   src={article.images[0]}
                   alt={article.title}
                   height={200}
-                  width={250}
+                  width={650}
                   className="size-full object-cover rounded-lg shadow-lg"
                 />
               )}

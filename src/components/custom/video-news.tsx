@@ -7,7 +7,7 @@ export default function VideoNews({
   data,
   hideShowAll,
 }: {
-  data: Data[];
+  data?: Data[];
   hideShowAll?: boolean;
 }) {
   return (
@@ -26,11 +26,11 @@ export default function VideoNews({
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {data.map((news) => (
+          {data?.map((news) => (
             <div key={news.id} className="group">
               <div className="relative aspect-video rounded-lg overflow-hidden mb-4 bg-gray-800">
                 <iframe
-                  src={`https://www.youtube.com/embed/${news.videos[0]}`}
+                  src={`https://www.youtube.com/embed/${news.videos?.[0]}`}
                   title={news.title}
                   className="w-full h-full"
                   allowFullScreen

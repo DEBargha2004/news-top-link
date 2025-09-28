@@ -9,7 +9,7 @@ import { Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 
-export default function AdCarousel({ data }: { data: AdBannerImageData[] }) {
+export default function AdCarousel({ data }: { data?: AdBannerImageData[] }) {
   const [activeAd, setActiveAd] = useState<AdBannerImageData>();
 
   return (
@@ -20,7 +20,7 @@ export default function AdCarousel({ data }: { data: AdBannerImageData[] }) {
         loop
         className="size-full"
       >
-        {data.map((ad, ad_idx) => (
+        {data?.map((ad, ad_idx) => (
           <SwiperSlide key={ad.id}>
             <Image
               src={ad.image_url}

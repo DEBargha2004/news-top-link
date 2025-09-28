@@ -15,7 +15,7 @@ export default async function Page() {
         </h2>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {res.data.map((category) => (
+          {res.data?.map((category) => (
             <div key={category.name} className="bg-gray-50 rounded-lg p-6">
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center">
@@ -36,7 +36,7 @@ export default async function Page() {
               </div>
 
               <div className="space-y-4">
-                {category.articles.slice(0, 4).map((article) => (
+                {category.articles.slice(0, 4)?.map((article) => (
                   <Link
                     href={`/news/${article.id}`}
                     key={article.id}

@@ -9,7 +9,7 @@ import Link from "next/link";
 export async function generateStaticParams() {
   const res = await getCategoryWiseNews();
 
-  return res.data.map((category) => ({
+  return res.data?.map((category) => ({
     cId: category.articles[0].category.id.toString(),
   }));
 }
@@ -56,7 +56,6 @@ export default async function Page({
             <div>
               <span className="text-red-600">Category</span>
               <h2 className="text-3xl font-bold text-gray-900">
-                <a></a>
                 {res.data[0]?.category.name}
               </h2>
               <div className="bg-red-600 w-20 h-[5px] rounded mt-5"></div>
@@ -65,7 +64,7 @@ export default async function Page({
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {res.data.map((news) => (
+          {res.data?.map((news) => (
             <Link href={`/news/${news.id}`} key={news.id} className="block">
               <article className="group cursor-pointer">
                 <div className="relative overflow-hidden rounded-lg mb-4">

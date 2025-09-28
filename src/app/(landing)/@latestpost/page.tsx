@@ -22,12 +22,12 @@ export default async function Page() {
             {/* Image Section */}
             <div className="relative overflow-hidden">
               <div className="w-full h-64 lg:h-full">
-                {post.images.length && (
+                {post?.images.length && (
                   <Image
                     src={post.images[0]}
                     alt={post.title}
-                    height={150}
-                    width={150}
+                    height={650}
+                    width={550}
                     className="size-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                 )}
@@ -35,7 +35,7 @@ export default async function Page() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent lg:hidden" />
               <div className="absolute top-4 left-4 flex items-center space-x-2">
                 <span className="px-3 py-1 bg-blue-600 text-white text-sm font-medium rounded-full">
-                  {post.category.name}
+                  {post?.category.name}
                 </span>
                 <span className="px-3 py-1 bg-red-600 text-white text-sm font-medium rounded-full">
                   Latest
@@ -48,16 +48,19 @@ export default async function Page() {
               <div className="flex items-center space-x-4 mb-4">
                 <div className="flex items-center space-x-2 text-sm text-gray-600">
                   <Clock className="h-4 w-4" />
-                  <span>{format(new Date(post.created_on), "PPP")}</span>
+                  <span>
+                    {post?.created_on &&
+                      format(new Date(post.created_on), "PPP")}
+                  </span>
                 </div>
               </div>
 
               <h1 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4 leading-tight group-hover:text-blue-600 transition-colors">
-                {post.title}
+                {post?.title}
               </h1>
 
               <p className="text-gray-700 text-lg mb-4 leading-relaxed line-clamp-[10]">
-                {post.body}
+                {post?.body}
               </p>
 
               <div className="flex items-center justify-between">
@@ -69,7 +72,7 @@ export default async function Page() {
                   </div> */}
                 </div>
 
-                <Link href={`/news/${post.id}`}>
+                <Link href={`/news/${post?.id}`}>
                   <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-200 hover:shadow-lg transform hover:-translate-y-0.5">
                     Read Full Article
                   </button>

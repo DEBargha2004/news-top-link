@@ -4,7 +4,7 @@ import { Eye, TrendingUp } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function TrendingNews({ data }: { data: Data[] }) {
+export default function TrendingNews({ data }: { data?: Data[] }) {
   return (
     <section className="py-12 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -14,7 +14,7 @@ export default function TrendingNews({ data }: { data: Data[] }) {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {data.map((post, index) => (
+          {data?.map((post, index) => (
             <article key={post.id} className="group cursor-pointer">
               <Link href={`/news/${post.id}`}>
                 <div className="relative overflow-hidden rounded-lg mb-4">
