@@ -43,7 +43,7 @@ const tithi_list: Tithi[] = [
   },
   {
     title: "শুভ নবমী",
-    date_start: new Date("2025-09-28"),
+    date_start: new Date("2025-09-01"),
     date_end: new Date("2025-10-02"),
   },
   {
