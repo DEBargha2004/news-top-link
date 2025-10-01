@@ -174,3 +174,6 @@ export async function getCategoryNewsInfo(id: string) {
   if (err) return createEmptyDataInstance<Data[]>([]);
   return res;
 }
+
+
+// Minor comment
