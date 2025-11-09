@@ -13,6 +13,8 @@ import { headers } from "next/headers";
 import Image from "next/image";
 import FbShare from "./_components/fb-share";
 import { getViews } from "@/lib/utils";
+import WpShare from "./_components/wp-share";
+import { FaWhatsapp } from "react-icons/fa";
 
 // const FbShare = dynamic(() => import("./_components/fb-share"), { ssr: false });
 
@@ -162,6 +164,12 @@ export default async function Page({
                   <span>Facebook</span>
                 </button>
               </FbShare>
+              <WpShare url={`${basePath}/news/${newsId}`}>
+                <button className="flex items-center space-x-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition-colors">
+                  <FaWhatsapp className="h-4 w-4" />
+                  <span>Facebook</span>
+                </button>
+              </WpShare>
             </div>
           </div>
         </article>
