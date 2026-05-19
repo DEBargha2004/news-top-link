@@ -15,6 +15,7 @@ import FbShare from "./_components/fb-share";
 import { getViews } from "@/lib/utils";
 import WpShare from "./_components/wp-share";
 import { FaWhatsapp } from "react-icons/fa";
+import DOMPurify from "isomorphic-dompurify";
 
 // const FbShare = dynamic(() => import("./_components/fb-share"), { ssr: false });
 
@@ -29,16 +30,19 @@ export async function generateMetadata({
   const protocol = headerInfo.get("x-forwarded-proto") ?? "http";
   const host = headerInfo.get("host");
 
+  const plainTextBody = article?.body ? article.body.replace(/<[^>]*>/g, "") : "";
+  const description = plainTextBody.slice(0, 200);
+
   return {
     title: article?.title,
-    description: article?.body.slice(0, 200),
+    description: description,
     openGraph: {
       title: article?.title,
-      description: article?.body.slice(0, 200),
+      description: description,
       url: `${protocol}://${host}/news/${newsId}`,
       images: [
         {
-          url: article?.images[0],
+          url: article?.images?.[0] || "",
           width: 1200,
           height: 630,
           alt: article?.title,
@@ -48,8 +52,8 @@ export async function generateMetadata({
     twitter: {
       card: "summary_large_image",
       title: article?.title,
-      description: article?.body.slice(0, 200),
-      images: [article?.images[0]],
+      description: description,
+      images: [article?.images?.[0] || ""],
     },
   };
 }
@@ -61,7 +65,7 @@ export async function generateStaticParams() {
   (await getLatestNews()).data?.forEach((news) => newsSet.add(news.id));
   (await getTrendingNews()).data?.forEach((news) => newsSet.add(news.id));
   (await getCategoryWiseNews()).data?.forEach((cat) =>
-    cat.articles.forEach((news) => newsSet.add(news.id))
+    cat.articles.forEach((news) => newsSet.add(news.id)),
   );
 
   return Array.from(newsSet).map((id) => ({ newsId: id.toString() }));
@@ -80,6 +84,7 @@ export default async function Page({
   const basePath = `${protocol}://${origin}`;
 
   const article = await getNewsInfo(newsId);
+  const sanitizedBody = article ? DOMPurify.sanitize(article.body) : "";
 
   return (
     !!article && (
@@ -95,19 +100,19 @@ export default async function Page({
             </GotoPrev>
             <div className="flex items-center space-x-3 mb-4">
               <span className="px-3 py-1 bg-blue-600 text-white text-sm font-medium rounded-full">
-                {article.category.name}
+                {article?.category?.name}
               </span>
               <div className="flex items-center space-x-4 text-sm text-gray-600">
                 <div className="flex items-center space-x-1">
                   <Clock className="h-4 w-4" />
-                  <span>{format(article.published_on, "PPP")}</span>
+                  {/* <span>{format(new Date(article.published_on), "PPP")}</span> */}
                 </div>
                 <div className="flex items-center space-x-1">
                   <Eye className="h-4 w-4" />
                   <span>
                     {getViews({
-                      published_on: article.published_on,
-                      seed: article.body,
+                      published_on: article?.published_on ?? "",
+                      seed: article?.body || "",
                     })}
                     &nbsp; views
                   </span>
@@ -137,9 +142,10 @@ export default async function Page({
 
           {/* Article Content */}
           <div className="prose prose-lg max-w-none mb-12">
-            <article className="text-gray-800 leading-relaxed space-y-6 lg:text-xl text-lg">
-              {article.body}
-            </article>
+            <article
+              className="text-gray-800 leading-relaxed lg:text-xl text-lg"
+              dangerouslySetInnerHTML={{ __html: sanitizedBody }}
+            />
           </div>
 
           {/* Tags */}
@@ -147,7 +153,7 @@ export default async function Page({
             <h4 className="text-lg font-semibold text-gray-900 mb-3">Tags</h4>
             <div className="flex flex-wrap gap-2">
               <span className="px-3 py-1 bg-gray-200 text-gray-700 text-sm rounded-full hover:bg-gray-300 cursor-pointer transition-colors">
-                {article.category.name}
+                {article.category?.name}
               </span>
             </div>
           </div>
@@ -177,3 +183,4 @@ export default async function Page({
     )
   );
 }
+

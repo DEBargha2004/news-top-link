@@ -13,6 +13,7 @@ import Link from "next/link";
 
 export default async function Footer() {
   const categoryResponse = await getCategoryWiseNews();
+
   const importantLinks = [
     {
       imageUrl:
@@ -103,16 +104,18 @@ export default async function Footer() {
           <div>
             <h4 className="text-lg font-semibold mb-4">Categories</h4>
             <ul className="space-y-2">
-              {categoryResponse.data?.map((category) => (
-                <li key={category.articles[0].category.id}>
-                  <a
-                    href={`/category/${category.articles[0].category.id}`}
-                    className="text-gray-400 hover:text-white transition-colors"
-                  >
-                    {category.name}
-                  </a>
-                </li>
-              ))}
+              {categoryResponse.data
+                ?.filter((c) => c.articles.length > 0)
+                .map((category) => (
+                  <li key={category.articles[0].category.id}>
+                    <a
+                      href={`/category/${category.articles[0].category.id}`}
+                      className="text-gray-400 hover:text-white transition-colors"
+                    >
+                      {category.name}
+                    </a>
+                  </li>
+                ))}
             </ul>
           </div>
 

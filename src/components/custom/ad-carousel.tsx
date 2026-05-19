@@ -25,10 +25,10 @@ export default function AdCarousel({ data }: { data?: AdBannerImageData[] }) {
             <Image
               src={ad.image_url}
               alt={`Advertisement ${ad_idx + 1}`}
-              height={100}
-              width={200}
+              height={300}
+              width={600}
               className={cn(
-                "w-full h-full transition-all duration-500 delay-500 absolute top-0 left-0"
+                "w-full h-full transition-all duration-500 delay-500 absolute top-0 left-0",
               )}
               onClick={() => setActiveAd(ad)}
             />
@@ -50,7 +50,7 @@ export default function AdCarousel({ data }: { data?: AdBannerImageData[] }) {
               height={300}
               width={600}
               className={cn(
-                "w-full max-h-[calc(90dvh)] transition-all duration-500 delay-500"
+                "w-full max-h-[calc(90dvh)] transition-all duration-500 delay-500",
               )}
             />
           </DialogContent>

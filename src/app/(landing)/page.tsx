@@ -45,6 +45,7 @@ export default async function Home() {
   const { data } = await getTopNews();
   const categories = await getCategoryWiseNews();
   const quoteData = await getQuotation();
+
   return (
     <div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full overflow-x-auto py-4 mb-0">

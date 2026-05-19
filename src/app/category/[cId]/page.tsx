@@ -5,6 +5,7 @@ import { ArrowLeft, Clock } from "lucide-react";
 import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import DOMPurify from "isomorphic-dompurify";
 
 export async function generateStaticParams() {
   const res = await getCategoryWiseNews();
@@ -90,9 +91,14 @@ export default async function Page({
                   {news.title}
                 </h3>
 
-                <p className="text-sm text-foreground/75 line-clamp-3 mb-2">
-                  {news.body}
-                </p>
+                <div
+                  className="text-sm text-foreground/75 line-clamp-3 mb-2"
+                  dangerouslySetInnerHTML={{
+                    __html: DOMPurify.sanitize(news.body, {
+                      ALLOWED_TAGS: ["b", "i", "em", "strong", "a", "span"],
+                    }),
+                  }}
+                />
 
                 <div className="flex items-center text-sm text-gray-500 space-x-4">
                   <div className="flex items-center space-x-1">

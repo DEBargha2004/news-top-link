@@ -4,6 +4,7 @@ import { format } from "date-fns";
 import { Clock, Eye, MessageCircle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import DOMPurify from "isomorphic-dompurify";
 
 export const revalidate = 60 * 10;
 
@@ -59,9 +60,14 @@ export default async function Page() {
                 {post?.title}
               </h1>
 
-              <p className="text-gray-700 text-lg mb-4 leading-relaxed line-clamp-[10]">
-                {post?.body}
-              </p>
+              <div
+                className="text-gray-700 text-lg mb-4 leading-relaxed line-clamp-[10]"
+                dangerouslySetInnerHTML={{
+                  __html: DOMPurify.sanitize(post?.body || "", {
+                    ALLOWED_TAGS: ["b", "i", "em", "strong", "a", "span"],
+                  }),
+                }}
+              />
 
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-6">

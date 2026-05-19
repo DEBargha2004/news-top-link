@@ -3,6 +3,7 @@ import { format } from "date-fns";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import DOMPurify from "isomorphic-dompurify";
 
 export default async function Page() {
   const res = await getCategoryWiseNews();
@@ -58,9 +59,14 @@ export default async function Page() {
                         <h3 className="font-semibold text-gray-900 group-hover:text-blue-600 transition-colors line-clamp-1 mb-1">
                           {article.title}
                         </h3>
-                        <p className="text-sm text-gray-600 line-clamp-2 mb-0">
-                          {article.body}
-                        </p>
+                        <div
+                          className="text-sm text-gray-600 line-clamp-2 mb-0"
+                          dangerouslySetInnerHTML={{
+                            __html: DOMPurify.sanitize(article.body, {
+                              ALLOWED_TAGS: ["b", "i", "em", "strong", "a", "span"],
+                            }),
+                          }}
+                        />
                         <span className="text-xs text-gray-500">
                           {format(article.published_on, "PPP")}
                         </span>
