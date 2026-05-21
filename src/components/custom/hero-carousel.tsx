@@ -2,7 +2,6 @@
 
 import { Data } from "@/types/response";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -38,7 +37,7 @@ export default function HeroCarousel({ data: slides }: { data: Data[] }) {
           >
             <div className="w-full h-full">
               {slide.images.length && (
-                <Image
+                <img
                   src={slide.images[0]}
                   alt={slide.title}
                   className="size-full object-cover"

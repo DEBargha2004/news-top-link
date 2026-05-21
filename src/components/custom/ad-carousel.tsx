@@ -1,6 +1,5 @@
 import { cn } from "@/lib/utils";
 import { AdBannerImageData } from "@/types/response";
-import Image from "next/image";
 import { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -22,7 +21,7 @@ export default function AdCarousel({ data }: { data?: AdBannerImageData[] }) {
       >
         {data?.map((ad, ad_idx) => (
           <SwiperSlide key={ad.id}>
-            <Image
+            <img
               src={ad.image_url}
               alt={`Advertisement ${ad_idx + 1}`}
               height={300}
@@ -31,6 +30,7 @@ export default function AdCarousel({ data }: { data?: AdBannerImageData[] }) {
                 "w-full h-full transition-all duration-500 delay-500 absolute top-0 left-0",
               )}
               onClick={() => setActiveAd(ad)}
+              loading="lazy"
             />
           </SwiperSlide>
         ))}
@@ -44,7 +44,7 @@ export default function AdCarousel({ data }: { data?: AdBannerImageData[] }) {
             <DialogHeader className="hidden">
               <DialogTitle />
             </DialogHeader>
-            <Image
+            <img
               src={activeAd!.image_url}
               alt={`Advertisement ${activeAd!.image_id + 1}`}
               height={300}
@@ -52,6 +52,7 @@ export default function AdCarousel({ data }: { data?: AdBannerImageData[] }) {
               className={cn(
                 "w-full max-h-[calc(90dvh)] transition-all duration-500 delay-500",
               )}
+              loading="lazy"
             />
           </DialogContent>
         </Dialog>

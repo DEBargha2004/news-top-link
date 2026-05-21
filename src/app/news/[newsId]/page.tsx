@@ -10,7 +10,6 @@ import { format } from "date-fns";
 import { ArrowLeft, Clock, Eye, Facebook, Share2, Twitter } from "lucide-react";
 import { Metadata } from "next";
 import { headers } from "next/headers";
-import Image from "next/image";
 import FbShare from "./_components/fb-share";
 import { getViews } from "@/lib/utils";
 import WpShare from "./_components/wp-share";
@@ -129,12 +128,13 @@ export default async function Page({
           <div className="mb-8">
             <div className="w-full h-64 md:h-96">
               {article.images?.length && (
-                <Image
+                <img
                   src={article.images[0]}
                   alt={article.title}
                   height={200}
                   width={650}
                   className="size-full object-cover rounded-lg shadow-lg"
+                  loading="lazy"
                 />
               )}
             </div>

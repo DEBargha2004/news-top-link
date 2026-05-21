@@ -3,7 +3,6 @@
 import { cn } from "@/lib/utils";
 import durga from "@/../public/durga.webp";
 import dhaki from "@/../public/dhaki.png";
-import Image from "next/image";
 import { useEffect, useState } from "react";
 
 const englishToBanglaDigits: Record<string, string> = {
@@ -107,7 +106,7 @@ export default function DurgaBanner() {
             )}
           >
             <div>
-              <Image src={durga} alt="surga-image" height={200} width={200} />
+              <img src={durga.src} alt="surga-image" height={200} width={200} loading="lazy" />
             </div>
             <div className="flex flex-col items-center justify-center gap-4 text-white flex-1">
               <h1 className="text-4xl font-bold whitespace-nowrap">
@@ -116,12 +115,13 @@ export default function DurgaBanner() {
               {timer && <Timer time={timer} />}
             </div>
             <div className="md:block hidden">
-              <Image
-                src={dhaki}
+              <img
+                src={dhaki.src}
                 alt="surga-image"
                 height={200}
                 width={200}
                 className="scale-125"
+                loading="lazy"
               />
             </div>
           </div>

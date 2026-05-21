@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import { format } from "date-fns";
 import { ArrowLeft, Clock } from "lucide-react";
 import { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import DOMPurify from "isomorphic-dompurify";
 
@@ -73,12 +72,13 @@ export default async function Page({
                 <div className="relative overflow-hidden rounded-lg mb-4">
                   {news.images.length && (
                     <div className="w-full h-48">
-                      <Image
+                      <img
                         src={news.images[0]}
                         alt={news.title}
                         height={100}
                         width={150}
                         className="size-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        loading="lazy"
                       />
                     </div>
                   )}

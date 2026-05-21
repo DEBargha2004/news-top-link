@@ -2,7 +2,6 @@ import { getLatestNews } from "@/actions/news";
 import { getViews } from "@/lib/utils";
 import { format } from "date-fns";
 import { Clock, Eye, MessageCircle } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 import DOMPurify from "isomorphic-dompurify";
 
@@ -24,12 +23,13 @@ export default async function Page() {
             <div className="relative overflow-hidden">
               <div className="w-full h-64 lg:h-full">
                 {post?.images.length && (
-                  <Image
+                  <img
                     src={post.images[0]}
                     alt={post.title}
                     height={650}
                     width={550}
                     className="size-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    loading="lazy"
                   />
                 )}
               </div>

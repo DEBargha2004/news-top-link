@@ -1,7 +1,6 @@
 import { getCategoryWiseNews } from "@/actions/news";
 import { format } from "date-fns";
 import { ArrowRight } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 import DOMPurify from "isomorphic-dompurify";
 
@@ -46,12 +45,13 @@ export default async function Page() {
                     <article className="flex space-x-4 group cursor-pointer">
                       <div className="w-24 h-20">
                         {article.images.length && (
-                          <Image
+                          <img
                             src={article.images[0]}
                             alt={article.title}
                             width={100}
                             height={80}
                             className="size-full object-cover rounded-lg flex-shrink-0 group-hover:scale-105 transition-transform duration-200"
+                            loading="lazy"
                           />
                         )}
                       </div>

@@ -1,7 +1,6 @@
 import { ApiResponseWithoutPagination, Data } from "@/types/response";
 import { format } from "date-fns";
 import { Clock } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 
 export default function TopNews({
@@ -33,12 +32,13 @@ export default function TopNews({
                 <div className="relative overflow-hidden rounded-lg mb-4">
                   <div className="w-full h-48">
                     {news.images.length && (
-                      <Image
+                      <img
                         src={news.images[0]}
                         alt={news.title}
                         className="size-full object-cover group-hover:scale-105 transition-transform duration-300"
                         height={100}
                         width={250}
+                        loading="lazy"
                       />
                     )}
                   </div>
