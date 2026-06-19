@@ -1,7 +1,6 @@
 import { getViews } from "@/lib/utils";
 import { Data } from "@/types/response";
 import { Eye, TrendingUp } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 
 export default function TrendingNews({ data }: { data?: Data[] }) {
@@ -20,12 +19,13 @@ export default function TrendingNews({ data }: { data?: Data[] }) {
                 <div className="relative overflow-hidden rounded-lg mb-4">
                   <div className="w-full h-56">
                     {!!post.images.length && (
-                      <Image
+                      <img
                         src={post.images[0]}
                         alt={post.title}
                         height={100}
                         width={200}
                         className="size-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        loading="lazy"
                       />
                     )}
                   </div>

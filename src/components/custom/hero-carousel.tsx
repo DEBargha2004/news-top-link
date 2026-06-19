@@ -2,9 +2,10 @@
 
 import { Data } from "@/types/response";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+
+import DOMPurify from "isomorphic-dompurify";
 
 export default function HeroCarousel({ data: slides }: { data: Data[] }) {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -36,7 +37,7 @@ export default function HeroCarousel({ data: slides }: { data: Data[] }) {
           >
             <div className="w-full h-full">
               {slide.images.length && (
-                <Image
+                <img
                   src={slide.images[0]}
                   alt={slide.title}
                   className="size-full object-cover"
@@ -51,9 +52,14 @@ export default function HeroCarousel({ data: slides }: { data: Data[] }) {
                 {slide.title}
               </h2>
 
-              <p className="text-gray-200 text-base md:text-lg max-w-3xl line-clamp-3">
-                {slide.body}
-              </p>
+              <div
+                className="text-gray-200 text-base md:text-lg max-w-3xl line-clamp-3"
+                dangerouslySetInnerHTML={{
+                  __html: DOMPurify.sanitize(slide.body, {
+                    ALLOWED_TAGS: ["b", "i", "em", "strong", "a", "span"],
+                  }),
+                }}
+              />
             </div>
           </div>
         </Link>

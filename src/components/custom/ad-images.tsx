@@ -7,7 +7,6 @@ import { Info } from "lucide-react";
 import { PopoverClose } from "@radix-ui/react-popover";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
-import Image from "next/image";
 import AdCarousel from "./ad-carousel";
 
 export default function AdImages({
