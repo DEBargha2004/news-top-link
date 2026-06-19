@@ -3,7 +3,7 @@ import { getViews } from "@/lib/utils";
 import { format } from "date-fns";
 import { Clock, Eye, MessageCircle } from "lucide-react";
 import Link from "next/link";
-import DOMPurify from "isomorphic-dompurify";
+import { sanitizeSnippet } from "@/lib/sanitize";
 
 export const revalidate = 60 * 10;
 
@@ -63,9 +63,7 @@ export default async function Page() {
               <div
                 className="text-gray-700 text-lg mb-4 leading-relaxed line-clamp-[10]"
                 dangerouslySetInnerHTML={{
-                  __html: DOMPurify.sanitize(post?.body || "", {
-                    ALLOWED_TAGS: ["b", "i", "em", "strong", "a", "span"],
-                  }),
+                  __html: sanitizeSnippet(post?.body || ""),
                 }}
               />
 

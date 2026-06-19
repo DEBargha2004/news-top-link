@@ -2,7 +2,7 @@ import { getViews } from "@/lib/utils";
 import { Data } from "@/types/response";
 import { format } from "date-fns";
 import Link from "next/link";
-import DOMPurify from "isomorphic-dompurify";
+import { sanitizeSnippet } from "@/lib/sanitize";
 
 export default function VideoNews({
   data,
@@ -45,9 +45,7 @@ export default function VideoNews({
               <div
                 className="text-gray-300 text-sm mb-2 line-clamp-2"
                 dangerouslySetInnerHTML={{
-                  __html: DOMPurify.sanitize(news.body, {
-                    ALLOWED_TAGS: ["b", "i", "em", "strong", "a", "span"],
-                  }),
+                  __html: sanitizeSnippet(news.body),
                 }}
               />
               <div className="flex items-center text-xs text-gray-400 gap-2">

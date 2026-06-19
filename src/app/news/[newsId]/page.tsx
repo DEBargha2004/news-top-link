@@ -6,17 +6,14 @@ import {
   getTrendingNews,
 } from "@/actions/news";
 import GotoPrev from "@/components/custom/go-to-prev";
-import { format } from "date-fns";
-import { ArrowLeft, Clock, Eye, Facebook, Share2, Twitter } from "lucide-react";
-import { Metadata } from "next";
-import { headers } from "next/headers";
+import { ArrowLeft, Clock, Eye, Facebook } from "lucide-react";
 import FbShare from "./_components/fb-share";
 import { getViews } from "@/lib/utils";
 import WpShare from "./_components/wp-share";
 import { FaWhatsapp } from "react-icons/fa";
-import DOMPurify from "isomorphic-dompurify";
-
-// const FbShare = dynamic(() => import("./_components/fb-share"), { ssr: false });
+import { sanitizeArticle } from "@/lib/sanitize";
+import { headers } from "next/headers";
+import { Metadata } from "next/types";
 
 export async function generateMetadata({
   params,
@@ -29,7 +26,9 @@ export async function generateMetadata({
   const protocol = headerInfo.get("x-forwarded-proto") ?? "http";
   const host = headerInfo.get("host");
 
-  const plainTextBody = article?.body ? article.body.replace(/<[^>]*>/g, "") : "";
+  const plainTextBody = article?.body
+    ? article.body.replace(/<[^>]*>/g, "")
+    : "";
   const description = plainTextBody.slice(0, 200);
 
   return {
@@ -83,7 +82,7 @@ export default async function Page({
   const basePath = `${protocol}://${origin}`;
 
   const article = await getNewsInfo(newsId);
-  const sanitizedBody = article ? DOMPurify.sanitize(article.body) : "";
+  const sanitizedBody = article ? sanitizeArticle(article.body) : "";
 
   return (
     !!article && (
@@ -183,4 +182,3 @@ export default async function Page({
     )
   );
 }
-

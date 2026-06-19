@@ -2,9 +2,9 @@ import { getCategoryWiseNews, getCategoryNewsInfo } from "@/actions/news";
 import { Button } from "@/components/ui/button";
 import { format } from "date-fns";
 import { ArrowLeft, Clock } from "lucide-react";
-import { Metadata } from "next";
 import Link from "next/link";
-import DOMPurify from "isomorphic-dompurify";
+import { sanitizeSnippet } from "@/lib/sanitize";
+import { Metadata } from "next/types";
 
 export async function generateStaticParams() {
   const res = await getCategoryWiseNews();
@@ -25,7 +25,7 @@ export async function generateMetadata({
   const res = await getCategoryWiseNews();
 
   const category = res.data?.find(
-    (cat) => cat.articles[0].category.id === Number(cId)
+    (cat) => cat.articles[0].category.id === Number(cId),
   );
 
   return {
@@ -94,9 +94,7 @@ export default async function Page({
                 <div
                   className="text-sm text-foreground/75 line-clamp-3 mb-2"
                   dangerouslySetInnerHTML={{
-                    __html: DOMPurify.sanitize(news.body, {
-                      ALLOWED_TAGS: ["b", "i", "em", "strong", "a", "span"],
-                    }),
+                    __html: sanitizeSnippet(news.body),
                   }}
                 />
 

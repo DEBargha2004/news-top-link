@@ -2,7 +2,7 @@ import { getCategoryWiseNews } from "@/actions/news";
 import { format } from "date-fns";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
-import DOMPurify from "isomorphic-dompurify";
+import { sanitizeSnippet } from "@/lib/sanitize";
 
 export default async function Page() {
   const res = await getCategoryWiseNews();
@@ -62,9 +62,7 @@ export default async function Page() {
                         <div
                           className="text-sm text-gray-600 line-clamp-2 mb-0"
                           dangerouslySetInnerHTML={{
-                            __html: DOMPurify.sanitize(article.body, {
-                              ALLOWED_TAGS: ["b", "i", "em", "strong", "a", "span"],
-                            }),
+                            __html: sanitizeSnippet(article.body),
                           }}
                         />
                         <span className="text-xs text-gray-500">
