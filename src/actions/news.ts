@@ -333,7 +333,7 @@ export async function getCategoryWiseNews() {
       >(
         retry(() =>
           fetch(
-            `${origin}/admin/article?published=true&categoryId=${cat.id}`,
+            `${origin}/public/article?published=true&categoryId=${cat.id}`,
             fetchOpts,
           ).then((res) => res.json()),
         ),
